@@ -1,0 +1,26 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 8vh;
+    background-color: #071330;
+}
+
+body{
+    background-color: #0C4160;
+}
+
+h1 {
+    color: #738FA7;
+    font-family: 'Libre Bodoni', serif;
+}
+
+p {
+    font-family: 'Crimson Text', serif;
+}
