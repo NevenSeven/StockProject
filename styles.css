@@ -18,6 +18,11 @@ nav {
     text-transform: uppercase;
     letter-spacing: 5px;
     font-size: 20px;
+    margin-left: 2%;
+}
+
+.logo a {
+    transition: 0.5s;
 }
 
 .nav-links {
@@ -39,11 +44,16 @@ a {
     letter-spacing: 3px;
     font-weight: bold;
     font-size: 14px;
+    transition: 0.5s;
 }
 
-.burger div {
-    width: 25px;
-    height 5px;
-    background-color: white;
-    margin: 5px;
+.logo a:hover, .nav-links a:hover {
+    color: yellow;
+}
+
+
+/* Link Hover Animation */
+
+@keyframes links {
+    color: yellow;
 }
