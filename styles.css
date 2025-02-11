@@ -57,3 +57,41 @@ a {
 @keyframes links {
     color: yellow;
 }
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+article {
+    display: inline-block;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+article h2 {
+    color: #333;
+}
+
+article ul {
+    margin-left: 5%;
+}
+
+.highlight {
+    display: flex;
+    justify-content: center;
+    background: yellow;
+    padding: 5px;
+}
