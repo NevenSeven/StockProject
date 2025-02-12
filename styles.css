@@ -14,6 +14,7 @@
     scrollbar-width: none;
 }
 
+
 nav {
     position: sticky;
     top: 0;
@@ -43,7 +44,12 @@ nav {
     justify-content: space-around;
 }
 
-.nav-links li {
+.nav-links   li {
+    list-style: none;
+}
+
+footer li {
+    padding: 5px;
     list-style: none;
 }
 
@@ -64,6 +70,8 @@ a {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     font-family: 'Libre Bodoni', serif;
     margin: 0;
     padding: 0;
@@ -82,13 +90,13 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+
 article {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    padding: 20px;
     padding-bottom: 40px;
     border-bottom: 1px dotted #ddd;
     line-height: 1.6;
