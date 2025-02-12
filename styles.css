@@ -1,20 +1,32 @@
+
+:root {
+    --text: #d5f9f8;
+    --background: #031514;
+    --primary: #8aefef;
+    --secondary: #37138e;
+    --accent: #ba38e4;
+}
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    scrollbar-width: none;
 }
 
 nav {
+    position: sticky;
+    top: 0;
     display:flex;
     justify-content: space-around;
     align-items: center;
     min-height: 8vh;
-    background-color: #071330;
+    background-color: var(--background);
     font-family: 'Libre Bodoni', serif;
 }
 
 .logo {
-    color: white;
+    color: var(--text);
     text-transform: uppercase;
     letter-spacing: 5px;
     font-size: 20px;
@@ -36,7 +48,7 @@ nav {
 }
 
 a {
-    color: white;
+    color: var(--text);
     text-decoration: none;
 }
 
@@ -48,50 +60,73 @@ a {
 }
 
 .logo a:hover, .nav-links a:hover {
-    color: yellow;
+    color: var(--accent);
 }
-
-
-/* Link Hover Animation */
-
-@keyframes links {
-    color: yellow;
-}
-
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Libre Bodoni', serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: var(--background);
 }
+
 .container {
     width: 80%;
     margin: auto;
     margin-top: 20px;
-    background: #fff;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background: #0a201f;
+    color: var(--text);
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 article {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 20px;
+    padding-bottom: 40px;
+    border-bottom: 1px dotted #ddd;
+    line-height: 1.6;
+    letter-spacing: 0.1rem;
 }
-article h2 {
-    color: #333;
+
+article h2{
+    font-size: 2.488rem;
+}
+
+article h3 {
+    font-size: 2.074rem;
+}
+
+article p {
+    margin-top: 15px;
+    font-size: 1rem;
+    width: 50%;
+    line-height: 1.6;
+    letter-spacing: normal;
 }
 
 article ul {
     margin-left: 5%;
+    margin-top: 15px;
+    font-size: 18px;
+    width: 50%;
+    line-height: 1.6;
+}
+
+article ul li::marker {
+    color: var(--accent);
 }
 
 .highlight {
     display: flex;
     justify-content: center;
-    background: yellow;
+    background: var(--accent);
+    color: var(--text);
     padding: 5px;
 }
