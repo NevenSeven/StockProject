@@ -155,15 +155,18 @@ article ul li::marker {
 #chart {
     display: flex;
     justify-content: center;
+    align-items: center;
     border-radius: 10px;
     background-color: var(--secondary);
     width: 45%;
 }
 
 #details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
     background-color: var(--primary);
     width: 45%;
-    border-radius: 10px;
     height: 200%;
-    justify-content: center;
 }
