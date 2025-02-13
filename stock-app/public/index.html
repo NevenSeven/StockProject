@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&display=swap');
+    </style>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Stock market simulator to learn how to navigate the market efficiently and with confidence through comprehensive graph visualization."
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -24,7 +27,8 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>StockStalker</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -39,5 +43,50 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+          
+    <nav>
+      <div class="logo">
+        <a class = "active" href="index.html">StockStalker</a>
+      </div>
+      <ul class="nav-links">
+        <li>
+        </li>
+        <li>
+          <a href="#">Watchlist</a>
+        </li>
+        <li>
+          <a href="infostock.html">Learn About Stocks</a>
+        </li>
+        <li>
+          <a href="#">Other Stocks</a>
+        </li>
+        <li>
+          <a href="#">Simulator</a>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+        <div class="container" id="home-page">
+          <div class="main-content">
+            <div id="details">
+              <h1>details and other stuff about the chart</h1>
+            </div>
+            <div id="chart">
+              <h1>chart goes here</h1>
+            </div>
+          </div>
+        </div>
+    </main>
+
+
+    <footer id="footer">
+      <li>
+        <a href="#about">About</a>
+      </li>
+      <li>
+        <a href="#contact">Contact Us</a>
+      </li>
+    </footer>
   </body>
 </html>
