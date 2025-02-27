@@ -32,25 +32,6 @@ function App() {
 
         const result = await response.json();
 
-        // Extract the latest stock price (first item in the array)
-        //const latestPrice = result[0]?.close;
-        //const latestDate = result[0]?.date;
-
-        //if (latestPrice) {
-          // Update site with data
-         // setData({
-         //   price: latestPrice,
-         //   date: latestDate,
-        //  });
-     //   } else {
-       //   setError('Could not retrieve the price.');
-     //   }
-    //  } catch (err) {
-   //     setError(err.message);
-   //   }
- //   };
-
-
         setData(result);
       } catch (err) {
         setError(err.message);
@@ -69,6 +50,16 @@ function App() {
     setSuggestions(stockTickers.filter(ticker => ticker.startsWith(value)));
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      if (suggestions.length > 0) {
+        setTicker(suggestions[0]);
+      } else if (searchTerm) {
+        setTicker(searchTerm);
+      }
+    }
+  };
+
   const handleSelectTicker = (selectedTicker) => {
     setTicker(selectedTicker);
     setSearchTerm("");
@@ -85,6 +76,7 @@ function App() {
         placeholder = "Search for a stock..."
         value = {searchTerm}
         onChange = {handleSearchChange}
+        onKeyDown={handleKeyDown}
       />
 
       {/* Suggestions Dropdown */}
