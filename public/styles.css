@@ -176,3 +176,13 @@ article ul li::marker {
     width: 45%;
     height: 200%;
 }
+
+App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: var(--primary);
+    width: 45%;
+    height: 200%;
+}
