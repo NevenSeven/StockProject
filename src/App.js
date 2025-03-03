@@ -67,6 +67,11 @@ function App() {
   };
 
   return (
+    <main>
+        <div class="container" id="home-page">
+          <div class="main-content">
+            <div id="details">
+              
     <div className="App">
       <h1>Stock Data</h1>
 
@@ -116,6 +121,11 @@ function App() {
         <p>Loading...</p>
       )}
     </div>
+    
+    </div>
+    </div>
+    </div>
+    </main>
   );
 }
 
