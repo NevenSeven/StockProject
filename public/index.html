@@ -13,82 +13,69 @@
       content="Stock market simulator to learn how to navigate the market efficiently and with confidence through comprehensive graph visualization."
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.goo gle.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!-- <link rel="icon" href="imgs/logo.ico" type="image/ico"> -->
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
     <link rel="stylesheet" href="styles.css">
     <title>StockStalker</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
           
     <nav>
       <div class="logo">
-
-        <a class = "active" href="index.html"><img src="/imgs/logo.jpg" alt="logo"></a>
+        <a class="active" href="index.html"><img src="/imgs/logo.jpg" alt="logo"></a>
       </div>
       <ul class="nav-links">
-        <li>
-        </li>
-        <li>
-          <a href="watchlist.html">Watchlist</a>
-        </li>
-        <li>
-          <a href="infostock.html">Learn About Stocks</a>
-        </li>
-        <li>
-          <a href="otherstocks.html">Other Stocks</a>
-        </li>
-        <li>
-          <a href="simulator.html">Simulator</a>
-        </li>
+        <li><a href="watchlist.html">Watchlist</a></li>
+        <li><a href="infostock.html">Learn About Stocks</a></li>
+        <li><a href="otherstocks.html">Other Stocks</a></li>
+        <li><a href="simulator.html">Simulator</a></li>
       </ul>
     </nav>
 
     <main>
-        <div class="container" id="home-page">
-          <div class="main-content">
-            <div id="details">
-              <h1>details and other stuff about the chart</h1>
-            </div>
-            <div id="chart">
-              <h1>chart goes here</h1>
-            </div>
+      <div class="container" id="home-page">
+        <div class="main-content">
+          <div id="details">
+            <h1>Details and other stuff about the chart</h1>
+          </div>
+          <div id="chart">
+            <!-- Table for Stock Data -->
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Open</th>
+                  <th>Close</th>
+                  <th>High</th>
+                  <th>Low</th>
+                  <th>Volume</th>
+                  <th>Adj Close</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025-03-03</td>
+                  <td>$213.35</td>
+                  <td>$205.02</td>
+                  <td>$214.01</td>
+                  <td>$202.55</td>
+                  <td>42,638,774</td>
+                  <td>$205.02</td>
+                </tr>
+                <!-- Add more rows here as needed -->
+              </tbody>
+            </table>
           </div>
         </div>
+      </div>
     </main>
 
-
     <footer id="footer">
-      <li>
-        <a href="#about">About</a>
-      </li>
-      <li>
-        <a href="#contact">Contact Us</a>
-      </li>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
     </footer>
   </body>
 </html>
