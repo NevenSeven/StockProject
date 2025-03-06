@@ -8,8 +8,19 @@
 }
 
 .App {
-    text-shadow: var(--text) 1px 0 10px;
+    text-shadow: var(--background) 1px 0 10px;
     color: var(--text);
+}
+
+.App input[type=text] {
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    font-size: 17px;
+}
+
+.App input ul {
+    color: black;
 }
 
 * {
@@ -36,6 +47,7 @@ nav {
     text-transform: uppercase;
     letter-spacing: 5px;
     font-size: 20px;
+    margin-top: 10px;
     margin-left: 2%;
 }
 
