@@ -23,6 +23,10 @@
     color: black;
 }
 
+.App .stock-data td {
+    color: black;
+}
+
 * {
     padding: 0;
     margin: 0;
