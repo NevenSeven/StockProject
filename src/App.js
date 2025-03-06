@@ -116,6 +116,30 @@ function App() {
               {data.percentageChange}%
             </span>
           </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Open</th>
+                  <th>Close</th>
+                  <th>High</th>
+                  <th>Low</th>
+                  <th>Volume</th>
+                  <th>Percentage Change</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{data.date}</td>
+                  <td>${data.open}</td>
+                  <td>${data.close}</td>
+                  <td>${data.high}</td>
+                  <td>${data.low}</td>
+                  <td>{data.volume}</td>
+                  <td>{data.percentageChange}%</td>
+                </tr>
+              </tbody>
+            </table>
         </div>
       ) : (
         <p>Loading...</p>
