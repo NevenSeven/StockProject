@@ -72,6 +72,18 @@ function App() {
   return (
     <div className="App">    
       
+      <div className="Dashboard">
+      <table>
+              <thead>
+                <tr>
+                  <th>S&P500</th>
+                  <th>[data]</th>
+                  <th>NASDAQ</th>
+                  <th>[data]</th>
+                </tr>
+              </thead>
+      </table>
+      </div>
 
       <h1>Stock Data</h1>
 
@@ -100,22 +112,6 @@ function App() {
       {data ? (
         <div className="stock-data">
           <h2>{data.ticker}</h2>
-          <p><strong>Date:</strong> {data.date}</p>
-          <p><strong>Open:</strong> ${data.open}</p>
-          <p><strong>Close:</strong> ${data.close}</p>
-          <p><strong>High:</strong> ${data.high}</p>
-          <p><strong>Low:</strong> ${data.low}</p>
-          <p><strong>Volume:</strong> {data.volume}</p>
-          <p>
-            <strong>Percentage Change:</strong>{" "}
-            <span
-              style={{
-                color: data.percentageChange >= 0 ? "green" : "red",
-              }}
-            >
-              {data.percentageChange}%
-            </span>
-          </p>
             <table>
               <thead>
                 <tr>
@@ -136,7 +132,13 @@ function App() {
                   <td>${data.high}</td>
                   <td>${data.low}</td>
                   <td>{data.volume}</td>
-                  <td>{data.percentageChange}%</td>
+                  <td><span
+              style={{
+                color: data.percentageChange >= 0 ? "green" : "red",
+              }}
+            >
+              {data.percentageChange}%
+            </span></td>
                 </tr>
               </tbody>
             </table>
