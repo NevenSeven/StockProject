@@ -1,16 +1,18 @@
 
 :root {
-    --text: #d5f9f8;
-    --background: #031514;
-    --primary: #8aefef;
-    --secondary: #37138e;
-    --accent: #ba38e4;
+    --text: #070808;
+    --background: #f8fafa   ;
+    --primary: #5f9fa0;
+    --secondary: #9ccfcf;
+    --accent: #6ec6c7;
 }
 
 .App {
     text-shadow: var(--background) 1px 0 10px;
     color: var(--text);
 }
+
+/* App search */
 
 .App input[type=text] {
     padding: 6px;
@@ -22,6 +24,8 @@
 .App input ul {
     color: black;
 }
+
+/* Stock Table */
 
 .App .stock-data td {
     color: black;
@@ -109,7 +113,7 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 10px;
-    background: #0a201f;
+    background: var(--accent);
     color: var(--text);
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
