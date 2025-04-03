@@ -11,6 +11,13 @@ function App() {
   const [searchTerm, setSearchTerm] = useState(""); // Input for search bar
   const [suggestions, setSuggestions] = useState([]); // search suggestions
 
+  // Separate state for S&P500 and NASDAQ
+  const [sp500Data, setSP500Data] = useState(null);
+  const [sp500Error, setSP500Error] = useState(null);
+
+  const [nasdaqData, setNasdaqData] = useState(null);
+  const [nasdaqError, setNasdaqError] = useState(null);
+
   const stockTickers = ["AAPL", "GOOGL", "MSFT", "AMZN", "TSLA", "META", "NFLX", "NVDA"];
 
   useEffect(() => {
@@ -41,6 +48,48 @@ function App() {
 
     fetchData();
   }, [ticker]); // runs when ticker changes
+
+  //fetch data for NASDAQ and S&P500
+  useEffect(() => {
+    const fetchIndicesData = async () => {
+      try {
+        // Fetch S&P 500 data
+        const sp500Response = await fetch(`http://localhost:5000/api/stock/RYSOX`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        });
+  
+        if (!sp500Response.ok) {
+          throw new Error(`Error fetching S&P 500: ${sp500Response.status} ${sp500Response.statusText}`);
+        }
+  
+        const sp500Result = await sp500Response.json();
+        console.log("Fetched S&P500 data:", sp500Result);
+        setSP500Data(sp500Result);
+  
+        // Fetch NASDAQ data
+        const nasdaqResponse = await fetch(`http://localhost:5000/api/stock/NDAQ`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        });
+  
+        if (!nasdaqResponse.ok) {
+          throw new Error(`Error fetching NASDAQ: ${nasdaqResponse.status} ${nasdaqResponse.statusText}`);
+        }
+  
+        const nasdaqResult = await nasdaqResponse.json();
+        console.log("Fetched NASDAQ data:", nasdaqResult);
+        setNasdaqData(nasdaqResult);
+  
+      } catch (err) {
+        console.error("Error fetching index data:", err);
+        setSP500Error(err.message);
+        setNasdaqError(err.message);
+      }
+    };
+  
+    fetchIndicesData();
+  }, []);
 
   //user input for search bar
   const handleSearchChange = (e) => {
@@ -77,9 +126,9 @@ function App() {
               <thead>
                 <tr>
                   <th>S&P500</th>
-                  <th>[data]</th>
+                  <th>{sp500Data ? `$${sp500Data.close}` : "Loading..."}</th>
                   <th>NASDAQ</th>
-                  <th>[data]</th>
+                  <th>{nasdaqData ? `$${nasdaqData.close}` : "Loading..."}</th>
                 </tr>
               </thead>
       </table>
