@@ -20,7 +20,7 @@ const Stockdata = () => {
   useEffect(() => {
     const fetchTickers = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/tickers`);
+        const response = await fetch(`https://stockstalker.vercel.app/api/tickers`);
         const result = await response.json();
         setTickersList(result.tickers || []); // expects { tickers: [...] }
       } catch (err) {
@@ -36,8 +36,8 @@ const Stockdata = () => {
     const fetchData = async () => {
       try {
         const endpoint = date
-          ? `http://localhost:5000/api/stock/${ticker}/${date}`
-          : `http://localhost:5000/api/stock/${ticker}`;
+          ? `https://stockstalker.vercel.app/api/stock/${ticker}/${date}`
+          : `https://stockstalker.vercel.app/api/stock/${ticker}`;
   
         const response = await fetch(endpoint);
         if (!response.ok) {
@@ -63,11 +63,11 @@ const Stockdata = () => {
   useEffect(() => {
     const fetchIndicesData = async () => {
       try {
-        const sp500Res = await fetch(`http://localhost:5000/api/stock/RYSOX`);
+        const sp500Res = await fetch(`https://stockstalker.vercel.app//api/stock/RYSOX`);
         const sp500Data = await sp500Res.json();
         setSP500Data(sp500Data);
 
-        const nasdaqRes = await fetch(`http://localhost:5000/api/stock/NDAQ`);
+        const nasdaqRes = await fetch(`https://stockstalker.vercel.app/api/stock/NDAQ`);
         const nasdaqData = await nasdaqRes.json();
         setNasdaqData(nasdaqData);
       } catch (err) {
