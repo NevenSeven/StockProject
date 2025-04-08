@@ -1,9 +1,9 @@
 // api/stock.js
 
-const fetch = require('node-fetch');
-const cors = require('cors');
-const fs = require('fs');
-const path = require('path');
+import fetch from 'node-fetch';  // Change to import
+import cors from 'cors';
+import fs from 'fs';
+import path from 'path';
 
 const apiKey = "55507a823c51d7bef567c5def36ae150da260b3a";
 
