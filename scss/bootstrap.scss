@@ -1,0 +1,8 @@
+// bootstrap.scss
+
+@use 'custom' as *;
+
+@use "../node_modules/bootstrap/scss/bootstrap.scss" with (
+  $primary: $primary,
+  $secondary: $secondary
+);

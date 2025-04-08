@@ -9,7 +9,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "compile:sass": "sass --watch scss:assets/css"
+    "compile:sass": "sass --watch scss:/src/assets/css"
   },
   "repository": {
     "type": "git",

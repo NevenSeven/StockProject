@@ -123,11 +123,11 @@ const Stockdata = () => {
     
   
     return (
-      <div class = "container-fluid text-center">
+      <div className = "container-fluid text-center">
   
         <div className="App">    
-            <div class="row">
-              <table class="table table-success">
+            <div className="row">
+              <table className="table table-success">
                     <thead>
                       <tr>
                         <th scope="row">S&P500</th>
@@ -141,9 +141,9 @@ const Stockdata = () => {
           <h1>Stock Data</h1>
   
         {/* Search Bar */}
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value = {searchTerm} onChange = {handleSearchChange} onKeyDown={handleKeyDown}></input>
-          <button class="btn btn-outline-success" type="submit" onPress={handleSubmit}>Search</button>
+        <form className="d-flex" role="search">
+          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value = {searchTerm} onChange = {handleSearchChange} onKeyDown={handleKeyDown}></input>
+          <button className="btn btn-outline-success" type="submit" onPress={handleSubmit}>Search</button>
         </form>
   
         
