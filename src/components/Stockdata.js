@@ -1,207 +1,206 @@
 // Stockdata.js
 import React, { useEffect, useState } from 'react';
 
-// Tiingo API key and URL for fetching stock prices
-const apiKey = '55507a823c51d7bef567c5def36ae150da260b3a';
-
 const Stockdata = () => {
-    const [ticker, setTicker] = useState("AAPL") // Defaults to Apple
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-    const [searchTerm, setSearchTerm] = useState(""); // Input for search bar
-    const [suggestions, setSuggestions] = useState([]); // search suggestions
-  
-    // Separate state for S&P500 and NASDAQ
-    const [sp500Data, setSP500Data] = useState(null);
-    const [sp500Error, setSP500Error] = useState(null);
-  
-    const [nasdaqData, setNasdaqData] = useState(null);
-    const [nasdaqError, setNasdaqError] = useState(null);
-  
-    const stockTickers = ["AAPL", "GOOGL", "MSFT", "AMZN", "TSLA", "META", "NFLX", "NVDA"];
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          // Fetch data from Tiingo API
-          const response = await fetch(
-            `http://localhost:5000/api/stock/${ticker}`,
-            {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-          });
-  
-          if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
-          }
-  
-          const result = await response.json();
-  
-          setData(result);
-        } catch (err) {
-          setError(err.message);
-          console.error('Fetch error:', err);
-        }
-      };
-  
-      fetchData();
-    }, [ticker]); // runs when ticker changes
-  
-    //fetch data for NASDAQ and S&P500
-    useEffect(() => {
-      const fetchIndicesData = async () => {
-        try {
-          // Fetch S&P 500 data
-          const sp500Response = await fetch(`http://localhost:5000/api/stock/RYSOX`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-          });
-    
-          if (!sp500Response.ok) {
-            throw new Error(`Error fetching S&P 500: ${sp500Response.status} ${sp500Response.statusText}`);
-          }
-    
-          const sp500Result = await sp500Response.json();
-          console.log("Fetched S&P500 data:", sp500Result);
-          setSP500Data(sp500Result);
-    
-          // Fetch NASDAQ data
-          const nasdaqResponse = await fetch(`http://localhost:5000/api/stock/NDAQ`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-          });
-    
-          if (!nasdaqResponse.ok) {
-            throw new Error(`Error fetching NASDAQ: ${nasdaqResponse.status} ${nasdaqResponse.statusText}`);
-          }
-    
-          const nasdaqResult = await nasdaqResponse.json();
-          console.log("Fetched NASDAQ data:", nasdaqResult);
-          setNasdaqData(nasdaqResult);
-    
-        } catch (err) {
-          console.error("Error fetching index data:", err);
-          setSP500Error(err.message);
-          setNasdaqError(err.message);
-        }
-      };
-    
-      fetchIndicesData();
-    }, []);
-  
-    //user input for search bar
-    const handleSearchChange = (e) => {
-      const value = e.target.value.toUpperCase();
-      setSearchTerm(value);
-  
-      setSuggestions(stockTickers.filter(ticker => ticker.startsWith(value)));
+  const [ticker, setTicker] = useState("AAPL");
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [tickersList, setTickersList] = useState([]); // ✅ new state
+  const [date, setDate] = useState(""); // Date in YYYY-MM-DD format
+
+  const [sp500Data, setSP500Data] = useState(null);
+  const [sp500Error, setSP500Error] = useState(null);
+
+  const [nasdaqData, setNasdaqData] = useState(null);
+  const [nasdaqError, setNasdaqError] = useState(null);
+
+  // ✅ Fetch tickers list on load
+  useEffect(() => {
+    const fetchTickers = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/tickers`);
+        const result = await response.json();
+        setTickersList(result.tickers || []); // expects { tickers: [...] }
+      } catch (err) {
+        console.error("Failed to fetch tickers list:", err);
+      }
     };
+
+    fetchTickers();
+  }, []);
+
+  // ✅ Fetch stock data when ticker changes
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const endpoint = date
+          ? `http://localhost:5000/api/stock/${ticker}/${date}`
+          : `http://localhost:5000/api/stock/${ticker}`;
   
-    const handleKeyDown = (e) => {
-      if (e.key === "Enter") {
-        handleSubmit();
+        const response = await fetch(endpoint);
+        if (!response.ok) {
+          throw new Error(`Error fetching stock data: ${response.statusText}`);
+        }
+  
+        const result = await response.json();
+        setData(result);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+        setData(null);
       }
     };
   
-    const handleSubmit = () => {
-        if (suggestions.length > 0) {
-          setTicker(suggestions[0]);
-        } else if (searchTerm) {
-          setTicker(searchTerm);
-        }
+    if (ticker) {
+      fetchData();
+    }
+  }, [ticker, date]); // ✅ Re-run when date changes too
+  
+
+  // Fetch index data once
+  useEffect(() => {
+    const fetchIndicesData = async () => {
+      try {
+        const sp500Res = await fetch(`http://localhost:5000/api/stock/RYSOX`);
+        const sp500Data = await sp500Res.json();
+        setSP500Data(sp500Data);
+
+        const nasdaqRes = await fetch(`http://localhost:5000/api/stock/NDAQ`);
+        const nasdaqData = await nasdaqRes.json();
+        setNasdaqData(nasdaqData);
+      } catch (err) {
+        setSP500Error(err.message);
+        setNasdaqError(err.message);
+      }
     };
-  
-    const handleSelectTicker = (selectedTicker) => {
-      setTicker(selectedTicker);
-      setSearchTerm("");
-      setSuggestions([])
-    };
-  
-  
-    
-  
-    return (
-      <div className = "container-fluid text-center">
-  
-        <div className="App">    
-            <div className="row">
-              <table className="table table-success">
-                    <thead>
-                      <tr>
-                        <th scope="row">S&P500</th>
-                        <th>{sp500Data ? `$${sp500Data.close}` : "Loading..."}</th>
-                        <th scope="row">NASDAQ</th>
-                        <th>{nasdaqData ? `$${nasdaqData.close}` : "Loading..."}</th>
-                      </tr>
-                    </thead>
-              </table>
-            </div>
-          <h1>Stock Data</h1>
-  
+
+    fetchIndicesData();
+  }, []);
+
+  // Handle input
+  const handleSearchChange = (e) => {
+    const value = e.target.value.toUpperCase();
+    setSearchTerm(value);
+    setSuggestions(
+      tickersList
+        .filter(t => t.startsWith(value))
+        .slice(0, 7) // limit to 7 suggestions
+    );  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
+  const handleSubmit = (e) => {
+    if (e) e.preventDefault(); // prevent page reload on submit
+    if (suggestions.length > 0) {
+      setTicker(suggestions[0]);
+    } else if (searchTerm) {
+      setTicker(searchTerm);
+    }
+  };
+
+  const handleSelectTicker = (selected) => {
+    setTicker(selected);
+    setSearchTerm("");
+    setSuggestions([]);
+  };
+
+  return (
+    <div className="container-fluid text-center">
+      <div className="App">
+        {/* Market Indices */}
+        <div className="row">
+          <table className="table table-success">
+            <thead>
+              <tr>
+                <th>S&P500</th>
+                <th>{sp500Data ? `$${sp500Data.close}` : "Loading..."}</th>
+                <th>NASDAQ</th>
+                <th>{nasdaqData ? `$${nasdaqData.close}` : "Loading..."}</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <h1>Stock Data</h1>
+
         {/* Search Bar */}
-        <form className="d-flex" role="search">
-          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value = {searchTerm} onChange = {handleSearchChange} onKeyDown={handleKeyDown}></input>
-          <button className="btn btn-outline-success" type="submit" onPress={handleSubmit}>Search</button>
+        <form className="d-flex" role="search" onSubmit={handleSubmit}>
+          <input
+            className="form-control me-2"
+            type="search"
+            placeholder="Search ticker"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            onKeyDown={handleKeyDown}
+          />
+          <button className="btn btn-outline-success" type="submit">Search</button>
         </form>
-  
-        
-  
+
         {/* Suggestions Dropdown */}
         {suggestions.length > 0 && (
-          <ul className='suggestions'>
-            {suggestions.map((suggestion) => (
-              <li key = {suggestion} onClick={() => handleSelectTicker(suggestion)}>
-                {suggestion}
-              </li>
+          <ul className="suggestions">
+            {suggestions.map((s) => (
+              <li key={s} onClick={() => handleSelectTicker(s)}>{s}</li>
             ))}
           </ul>
         )}
-  
-        {/* Display Stock Data */}
-        {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+        {/* Date Picker */}
+        <div className="mb-3">
+          <label htmlFor="datePicker" className="form-label">Select Date:</label>
+          <input
+            type="date"
+            id="datePicker"
+            className="form-control"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </div>
+        {/* Stock Info Table */}
+        {error && <p style={{ color: "red" }}>Error: {error}</p>}
         {data ? (
           <div className="stock-data">
             <h2>{data.ticker}</h2>
-              <table class="table table-success table-striped-columns">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Open</th>
-                    <th>Close</th>
-                    <th>High</th>
-                    <th>Low</th>
-                    <th>Volume</th>
-                    <th>Percentage Change</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{data.date}</td>
-                    <td>${data.open}</td>
-                    <td>${data.close}</td>
-                    <td>${data.high}</td>
-                    <td>${data.low}</td>
-                    <td>{data.volume}</td>
-                    <td><span
-                style={{
-                  background: data.percentageChange >= 0 ? "green" : "red",
-                }}
-              >
-                {data.percentageChange}%
-              </span></td>
-                  </tr>
-                </tbody>
-              </table>
+            <table className="table table-success table-striped-columns">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Open</th>
+                  <th>Close</th>
+                  <th>High</th>
+                  <th>Low</th>
+                  <th>Volume</th>
+                  <th>Change %</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{data.date}</td>
+                  <td>${data.open}</td>
+                  <td>${data.close}</td>
+                  <td>${data.high}</td>
+                  <td>${data.low}</td>
+                  <td>{data.volume}</td>
+                  <td>
+                    <span style={{ background: data.percentageChange >= 0 ? "green" : "red", color: "white", padding: "0 5px", borderRadius: "5px" }}>
+                      {data.percentageChange}%
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         ) : (
-          <p>Loading...</p>
-        )}    
-  
+          <p>Loading stock data...</p>
+        )}
       </div>
-      </div>
-    
-    );
-  }
+    </div>
+  );
+};
+
 export default Stockdata;
