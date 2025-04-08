@@ -37,20 +37,21 @@ const Stockdata = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const endpoint = date
-          ? `https://stockstalker.vercel.app/api/stock/${ticker}/${date}`
-          : `https://stockstalker.vercel.app/api/stock/${ticker}`;
+        const params = new URLSearchParams({ ticker });
+        if (date) params.append("date", date);
   
+        const endpoint = `https://stockstalker.vercel.app/api/stock?${params.toString()}`;
         const response = await fetch(endpoint);
+  
         if (!response.ok) {
-          const text = await response.text();
-          throw new Error(`Error fetching stock data: ${response.status} ${response.statusText} - ${text}`);
+          throw new Error(`Error fetching stock data: ${response.status} - ${response.statusText}`);
         }
   
         const result = await response.json();
         setData(result);
         setError(null);
       } catch (err) {
+        console.error("Fetch error:", err);
         setError(err.message);
         setData(null);
       }
@@ -59,7 +60,7 @@ const Stockdata = () => {
     if (ticker) {
       fetchData();
     }
-  }, [ticker, date]); // ✅ Re-run when date changes too
+  }, [ticker, date]);
   
 
   // Fetch index data once
