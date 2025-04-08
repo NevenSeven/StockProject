@@ -21,6 +21,8 @@ const Stockdata = () => {
     const fetchTickers = async () => {
       try {
         const response = await fetch(`https://stockstalker.vercel.app/api/tickers`);
+        const text = await response.text();
+        console.log("Tickers raw response:", text);
         const result = await response.json();
         setTickersList(result.tickers || []); // expects { tickers: [...] }
       } catch (err) {
@@ -41,7 +43,8 @@ const Stockdata = () => {
   
         const response = await fetch(endpoint);
         if (!response.ok) {
-          throw new Error(`Error fetching stock data: ${response.statusText}`);
+          const text = await response.text();
+          throw new Error(`Error fetching stock data: ${response.status} ${response.statusText} - ${text}`);
         }
   
         const result = await response.json();
