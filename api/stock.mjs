@@ -1,41 +1,37 @@
-// api/stock.js
-
-import fetch from 'node-fetch';  // Change to import
+import fetch from 'node-fetch';
 import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 const apiKey = "55507a823c51d7bef567c5def36ae150da260b3a";
 
-// ✅ Read tickers from text file (same as in server.js)
+// Get the current directory name
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Read tickers from text file
 const tickersPath = path.join(__dirname, '../tickers.txt');
-const stockTickers = fs.readFileSync(tickersPath, "utf-8")
-  .split("\n")
+const stockTickers = fs.readFileSync(tickersPath, 'utf-8')
+  .split('\n')
   .map(t => t.trim())
   .filter(t => t.length > 0);
 
-// Set up CORS
 const corsMiddleware = cors();
 
-// Wrapper to handle serverless function response
-function handleCors(req, res, next) {
-  corsMiddleware(req, res, next);
-}
-
-// API Endpoint to get all tickers
 export default async function handler(req, res) {
-  handleCors(req, res, async () => {
+  corsMiddleware(req, res, async () => {
     const { method } = req;
-    if (method === "GET" && req.query.ticker) {
+    if (method === 'GET' && req.query.ticker) {
       const ticker = req.query.ticker;
       try {
-        // Endpoint to get stock data for a specific ticker
         const apiUrl = `https://api.tiingo.com/tiingo/daily/${ticker}/prices?token=${apiKey}`;
         const response = await fetch(apiUrl);
 
         if (!response.ok) {
           const errorText = await response.text();
-          console.error("API response error:", errorText);
+          console.error('API response error:', errorText);
           return res.status(500).json({ error: `Failed to fetch stock data: ${response.status} ${response.statusText}` });
         }
 
@@ -58,11 +54,10 @@ export default async function handler(req, res) {
 
         res.status(200).json(stockData);
       } catch (error) {
-        console.error("Backend error:", error);
+        console.error('Backend error:', error);
         res.status(500).json({ error: error.message });
       }
-    } else if (method === "GET" && !req.query.ticker) {
-      // Optional: Return all stock tickers if no ticker is provided
+    } else if (method === 'GET' && !req.query.ticker) {
       res.status(200).json({ tickers: stockTickers });
     } else {
       res.status(405).json({ error: `Method ${method} Not Allowed` });
