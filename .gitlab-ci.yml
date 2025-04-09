@@ -1,9 +1,0 @@
-deploy:
-  image: node:18
-  script:
-    - npm install -g vercel
-    - vercel pull --yes --environment=production --token=$VERCEL_TOKEN --org-id=$VERCEL_ORG_ID --project-id=$VERCEL_PROJECT_ID
-    - vercel build --prod --token=$VERCEL_TOKEN
-    - vercel deploy --prod --prebuilt --token=$VERCEL_TOKEN
-  only:
-    - main
