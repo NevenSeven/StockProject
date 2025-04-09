@@ -67,11 +67,11 @@ const Stockdata = () => {
   useEffect(() => {
     const fetchIndicesData = async () => {
       try {
-        const sp500Res = await fetch(`https://stockstalker.vercel.app/api/stock/RYSOX`);
+        const sp500Res = await fetch(`https://api.tiingo.com/tiingo/daily/RYSOX/prices?token=55507a823c51d7bef567c5def36ae150da260b3a`);
         const sp500Data = await sp500Res.json();
         setSP500Data(sp500Data);
 
-        const nasdaqRes = await fetch(`https://stockstalker.vercel.app/api/stock/NDAQ`);
+        const nasdaqRes = await fetch(`https://api.tiingo.com/tiingo/daily/NDAQ/prices?token=55507a823c51d7bef567c5def36ae150da260b3a`);
         const nasdaqData = await nasdaqRes.json();
         setNasdaqData(nasdaqData);
       } catch (err) {
