@@ -67,7 +67,7 @@ const Stockdata = () => {
   useEffect(() => {
     const fetchIndicesData = async () => {
       try {
-        const sp500Res = await fetch(`https://stockstalker.vercel.app//api/stock/RYSOX`);
+        const sp500Res = await fetch(`https://stockstalker.vercel.app/api/stock/RYSOX`);
         const sp500Data = await sp500Res.json();
         setSP500Data(sp500Data);
 
