@@ -170,7 +170,7 @@ const Stockdata = () => {
         {data ? (
           <div className="stock-data">
             <h2>{data.ticker}</h2>
-            <table className="table table-success table-striped-columns">
+            <table className="table-responsive table-success table-striped-columns">
               <thead>
                 <tr>
                   <th>Date</th>
