@@ -8,7 +8,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "compile:sass": "sass --watch scss:/src/assets/css"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,13 @@
     "express": "^4.21.2",
     "node-fetch": "^3.3.2",
     "react-dom": "^19.0.0",
+<<<<<<< HEAD
     "react-scripts": "^3.0.1",
     "recharts": "^2.15.2",
+=======
+    "react-router-dom": "^7.5.0",
+    "react-scripts": "^5.0.1",
+>>>>>>> 15971b05145b07aac6e13d42c6f4561e5e091962
     "web-vitals": "^4.2.4"
   },
   "browserslist": {
