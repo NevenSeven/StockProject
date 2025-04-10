@@ -8,7 +8,6 @@ import Simulator from './pages/Simulator';
 import Info from './pages/Info';
 import Other from './pages/Other';
 
-
 function App() {
   return (
     <Router>

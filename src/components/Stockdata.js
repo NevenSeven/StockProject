@@ -133,38 +133,41 @@ const Stockdata = () => {
 
         <h1>Stock Data</h1>
 
-        {/* Search Bar */}
-        <form className="d-flex" role="search" onSubmit={handleSubmit}>
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search ticker"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            onKeyDown={handleKeyDown}
-          />
-          <button className="btn btn-outline-success" type="submit">Search</button>
-        </form>
 
-        {/* Suggestions Dropdown */}
-        {suggestions.length > 0 && (
-          <ul className="suggestions">
-            {suggestions.map((s) => (
-              <li key={s} onClick={() => handleSelectTicker(s)}>{s}</li>
-            ))}
-          </ul>
-        )}
-        {/* Date Picker */}
-        <div className="mb-3">
-          <label htmlFor="datePicker" className="form-label">Select Date:</label>
-          <input
-            type="date"
-            id="datePicker"
-            className="form-control"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </div>
+        {/* Search Bar */}
+          <form className="d-flex" role="search" onSubmit={handleSubmit}>
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search ticker"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              onKeyDown={handleKeyDown}
+            />
+            <button className="btn btn-outline-success" type="submit">Search</button>
+          </form>
+
+          {/* Suggestions Dropdown */}
+          {suggestions.length > 0 && (
+            <ul className="suggestions">
+              {suggestions.map((s) => (
+                <li key={s} onClick={() => handleSelectTicker(s)}>{s}</li>
+              ))}
+            </ul>
+          )}
+          {/* Date Picker */}
+          <div className="mb-3">
+            <label htmlFor="datePicker" className="form-label">Select Date:</label>
+            <input
+              type="date"
+              id="datePicker"
+              className="form-control"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </div>
+        
+
         {/* Stock Info Table */}
         {error && <p style={{ color: "red" }}>Error: {error}</p>}
         {data ? (
@@ -185,7 +188,7 @@ const Stockdata = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>{data.date}</td>
+                  <td>{data.date.split('T')[0]}</td>
                   <td>${data.open}</td>
                   <td>${data.close}</td>
                   <td>${data.high}</td>
