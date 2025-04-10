@@ -1,9 +1,9 @@
 {
   "name": "stock-project",
   "version": "1.0.0",
-  "proxy": "https://api.tiingo.com",
   "description": "To make it easy for you to get started with GitLab, here's a list of recommended next steps.",
   "main": "src/index.js",
+  "proxy": "https://api.tiingo.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
