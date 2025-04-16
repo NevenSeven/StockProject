@@ -5,20 +5,18 @@ function Chart() {
   const chartContainerRef = useRef(null);
 
   useEffect(() => {
+    if (!chartContainerRef.current) return;
+
     const chart = createChart(chartContainerRef.current, {
-      width: chartContainerRef.current.clientWidth,
+      width: chartContainerRef.current.clientWidth || 600,
       height: 400,
       layout: {
         backgroundColor: '#ffffff',
         textColor: '#000000',
       },
       grid: {
-        vertLines: {
-          color: '#eee',
-        },
-        horzLines: {
-          color: '#eee',
-        },
+        vertLines: { color: '#eee' },
+        horzLines: { color: '#eee' },
       },
       timeScale: {
         timeVisible: true,
@@ -48,7 +46,12 @@ function Chart() {
 
   return React.createElement('div', {
     ref: chartContainerRef,
-    style: { width: '100%' },
+    style: {
+      width: '100%',
+      minHeight: '400px',
+      marginTop: '2rem',
+      border: '1px solid #ccc', // Optional: helps visualize space
+    },
   });
 }
 
