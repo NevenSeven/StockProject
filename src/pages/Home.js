@@ -1,11 +1,11 @@
 import React from 'react';
 import Stockdata from '../components/Stockdata';
-import tradingViewWidget from '../tradeview/tradingViewWidget';
+import TradingViewWidget from '../tradeview/TradingViewWidget';
 
 const Home = () => {
   <>
     <Stockdata />
-    <tradingViewWidget/>
+    <TradingViewWidget/>
   </>
 
 };
