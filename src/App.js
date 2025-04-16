@@ -7,7 +7,7 @@ import Watchlist from './pages/Watchlist';
 import Simulator from './pages/Simulator';
 import Info from './pages/Info';
 import Other from './pages/Other';
-import tradingViewWidget from './tradeview/TradingViewWidget';
+
 
 function App() {
   return (
