@@ -20,7 +20,7 @@ const Stockdata = () => {
   useEffect(() => {
     const fetchTickers = async () => {
       try {
-        const response = await fetch(`https://stockstalker.vercel.app/api/tickers`);
+        const response = await fetch("/tickers.txt");
         console.log("Tickers raw response:", text);
         const result = await response.json();
         setTickersList(result.tickers || []); // expects { tickers: [...] }
