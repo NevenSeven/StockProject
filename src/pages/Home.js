@@ -4,11 +4,12 @@ import TradingViewWidget from './tradeview/TradingViewWidget';
 
 
 const Home = () => {
+  return(
   <>
     <Stockdata />
     <TradingViewWidget/>
   </>
-
+  );
 };
 
 export default Home;
