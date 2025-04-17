@@ -1,5 +1,6 @@
 // Stockdata.js
 import React, { useEffect, useState } from 'react';
+import TradingViewWidget from '../pages/tradeview/TradingViewWidget';
 
 const Stockdata = () => {
   const [ticker, setTicker] = useState("AAPL");
@@ -230,6 +231,7 @@ const Stockdata = () => {
           <p>Loading stock data...</p>
         )}
       </div>
+      <TradingViewWidget ticker={ticker} />
     </div>
   );
 };
