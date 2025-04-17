@@ -127,7 +127,7 @@ const Stockdata = () => {
       <div className="App">
         {/* Market Indices */}
         <div className="row">
-          <table className="table table-success">
+          <table className="table table-success table-striped-columns">
             <thead>
               <tr>
                 <th>S&P500</th>

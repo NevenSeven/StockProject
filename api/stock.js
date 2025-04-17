@@ -3,11 +3,13 @@ export default async function handler(req, res) {
 
   const { method, query } = req;
   const ticker = query.ticker;
+  const date = query.date;
   const apiKey = "55507a823c51d7bef567c5def36ae150da260b3a";
 
   if (method !== 'GET') {
     return res.status(405).json({ error: `Method ${method} Not Allowed` });
   }
+
 
   // 🟢 Handle request with no ticker: return tickers list
   if (!ticker) {
@@ -32,7 +34,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Missing TIINGO_API_KEY" });
     }
 
-    const apiUrl = `https://api.tiingo.com/tiingo/daily/${ticker}/prices?token=${apiKey}`;
+    let apiUrl = `https://api.tiingo.com/tiingo/daily/${ticker}/prices?token=${apiKey}`;
+    if (date) {
+      apiUrl += `&startDate=${date}&endDate=${date}`;
+    }
     const response = await fetch(apiUrl);
 
     if (!response.ok) {
