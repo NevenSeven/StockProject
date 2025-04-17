@@ -21,11 +21,15 @@ const Stockdata = () => {
     const fetchTickers = async () => {
       try {
         const response = await fetch("/tickers.txt");
-        const text = await fetch("/tickers.txt");
-        const tickers = text
+        const text = await response.text();
         console.log("Tickers raw response:", text);
-        const result = await response.json();
-        setTickersList(tickers); // expects { tickers: [...] }
+
+        const tickers = text
+          .split("\n")
+          .map(t => t.trim())
+          .filter(Boolean);
+
+        setTickersList(tickers);
       } catch (err) {
         console.error("Failed to fetch tickers list:", err);
       }
