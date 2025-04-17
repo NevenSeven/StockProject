@@ -20,10 +20,12 @@ const Stockdata = () => {
   useEffect(() => {
     const fetchTickers = async () => {
       try {
-        const response = await fetch(`https://stockstalker.vercel.app/api/tickers`);
+        const response = await fetch("/tickers.txt");
+        const text = await fetch("/tickers.txt");
+        const tickers = text
         console.log("Tickers raw response:", text);
         const result = await response.json();
-        setTickersList(result.tickers || []); // expects { tickers: [...] }
+        setTickersList(tickers); // expects { tickers: [...] }
       } catch (err) {
         console.error("Failed to fetch tickers list:", err);
       }
@@ -86,11 +88,18 @@ const Stockdata = () => {
   const handleSearchChange = (e) => {
     const value = e.target.value.toUpperCase();
     setSearchTerm(value);
-    setSuggestions(
-      tickersList
+
+    if (!value) {
+      setSuggestions([]);
+      return;
+    }
+
+    const filtered = tickersList
         .filter(t => t.startsWith(value))
         .slice(0, 7) // limit to 7 suggestions
-    );  };
+
+    setSuggestions(filtered);
+  };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -107,8 +116,8 @@ const Stockdata = () => {
     }
   };
 
-  const handleSelectTicker = (selected) => {
-    setTicker(selected);
+  const handleSelectTicker = (ticker) => {
+    setTicker(ticker);
     setSearchTerm("");
     setSuggestions([]);
   };
@@ -145,6 +154,20 @@ const Stockdata = () => {
             />
             <button className="btn btn-outline-success" type="submit">Search</button>
           </form>
+                    {suggestions.length > 0 && (
+            <ul className="suggestions-list list-group mt-2" style={{ position: 'absolute', zIndex: 1000, width: '250px' }}>
+              {suggestions.map((s, i) => (
+                <li
+                  key={i}
+                  className="list-group-item list-group-item-action"
+                  onClick={() => handleSelectTicker(s)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {s}
+                </li>
+              ))}
+            </ul>
+          )}
 
           {/* Suggestions Dropdown */}
           {suggestions.length > 0 && (
