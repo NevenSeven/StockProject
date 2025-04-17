@@ -12,7 +12,7 @@ function TradingViewWidget() {
       script.async = true;
       script.innerHTML = JSON.stringify({
           "autosize": true,
-          "symbol": "NASDAQ:AAPL",
+          "symbol": `NASDAQ:${ticker || "AAPL"}`,
           "interval": "D",
           "timezone": "Etc/UTC",
           "theme": "light",
