@@ -231,7 +231,6 @@ const Stockdata = () => {
           <p>Loading stock data...</p>
         )}
       </div>
-      <TradingViewWidget ticker={ticker} />
     </div>
   );
 };
