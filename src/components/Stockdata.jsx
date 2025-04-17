@@ -70,22 +70,18 @@ const Stockdata = () => {
 
   // Fetch index data once
   useEffect(() => {
-    const fetchIndicesData = async () => {
+    const fetchIndices = async () => {
       try {
-        const sp500Res = await fetch(`https://api.tiingo.com/tiingo/daily/RYSOX/prices?token=55507a823c51d7bef567c5def36ae150da260b3a`);
-        const sp500Data = await sp500Res.json();
-        setSP500Data(sp500Data);
-
-        const nasdaqRes = await fetch(`https://api.tiingo.com/tiingo/daily/NDAQ/prices?token=55507a823c51d7bef567c5def36ae150da260b3a`);
-        const nasdaqData = await nasdaqRes.json();
-        setNasdaqData(nasdaqData);
+        const response = await fetch("/api/indices");
+        const result = await response.json();
+        setSP500Data(result.sp500);
+        setNasdaqData(result.nasdaq);
       } catch (err) {
-        setSP500Error(err.message);
-        setNasdaqError(err.message);
+        console.error("Index fetch error:", err);
       }
     };
-
-    fetchIndicesData();
+  
+    fetchIndices();
   }, []);
 
   // Handle input
