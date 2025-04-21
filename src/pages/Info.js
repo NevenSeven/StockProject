@@ -41,7 +41,7 @@ const Info = () => {
           <div className="card">
             <div className="card-body">
               <h2 className="card-title">How People Buy and Trade Stocks Now</h2>
-              <p className='card-text'>Most people use online brokerage accounts or apps to trade stocks. These platforms offer easy-to-use interfaces.</p><br>
+              <p className='card-text'>Most people use online brokerage accounts or apps to trade stocks. These platforms offer easy-to-use interfaces.</p>
               <h3 className="mt-3">Best Apps for Stock Trading</h3>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item"><strong>Robinhood</strong> – Commission-free, beginner-friendly.</li>
