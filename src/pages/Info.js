@@ -18,7 +18,7 @@ const Info = () => {
             <div className="card h-100">
               <div className="card-body">
                 <h2 className="card-title">The First Stock</h2>
-                <p className="card-text">The Dutch East India Company is credited with issuing the first stock...</p>
+                <p className="card-text">The concept of stocks dates back to the early 17th century. The first modern stock market, the Amsterdam Stock Exchange, was established in 1602 by the Dutch East India Company. This allowed people to buy and sell shares of the company, marking the beginning of stock trading.</p>
               </div>
             </div>
           </div>
