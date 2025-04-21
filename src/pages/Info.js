@@ -30,7 +30,7 @@ const Info = () => {
           <div className="card">
             <div className="card-body">
               <h2 className="card-title">How People Bought and Traded Stock in the Past</h2>
-              <p className="card-text">Before modern technology, stock trading was done manually...</p>
+              <p className='card-text'>Before modern technology, stock trading was done manually. Traders gathered on trading floors, using hand signals and shouting orders. The NYSE was founded in 1792 when 24 stockbrokers signed the Buttonwood Agreement.</p>
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@ const Info = () => {
           <div className="card">
             <div className="card-body">
               <h2 className="card-title">How People Buy and Trade Stocks Now</h2>
-              <p className="card-text">Most people use online brokerage accounts or apps to trade stocks...</p>
+              <p className='card-text'>Most people use online brokerage accounts or apps to trade stocks. These platforms offer easy-to-use interfaces.</p><br>
               <h3 className="mt-3">Best Apps for Stock Trading</h3>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item"><strong>Robinhood</strong> – Commission-free, beginner-friendly.</li>
@@ -71,7 +71,7 @@ const Info = () => {
           <div className="card">
             <div className="card-body">
               <h2 className="card-title">Most Valuable Stock</h2>
-              <p className="card-text">The most valuable stock by share price is <strong>Berkshire Hathaway (BRK.A)</strong>...</p>
+              <p className="card-text">The most valuable stock by share price is <strong>Berkshire Hathaway (BRK.A)</strong>. In terms of market capitalization, companies like Apple and Microsoft lead.</p>
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@ const Info = () => {
           <div className="card">
             <div className="card-body">
               <h2 className="card-title">How Stock Trading Works Today</h2>
-              <p className="card-text">Stock prices are determined by supply and demand...</p>
+              <p className="card-text">Stock prices are determined by supply and demand. Investors use strategies like technical and fundamental analysis to predict price movements.</p>
             </div>
           </div>
         </div>
