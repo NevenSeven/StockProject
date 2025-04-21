@@ -10,7 +10,7 @@ function TradingViewWidget() {
       script.src = "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js";
       script.type = "text/javascript";
       script.async = true;
-      script.innerHTML = `
+      script.textContent  = `
         {
           "symbols": [
             [
