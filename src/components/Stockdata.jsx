@@ -228,6 +228,7 @@ const Stockdata = () => {
             </table>
             </div>
 
+            {console.log("Widget symbol sent:", `NASDAQ:${ticker}`)}
             <TradingViewWidget symbol={`NASDAQ:${ticker}`} />
 
           </div>

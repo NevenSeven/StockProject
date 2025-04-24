@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, memo } from 'react';
 
 function TradingViewWidget({symbol = "NASDAQ:AAPL"}) {
-  const container = useRef();
+  const container = useRef(null);
 
-  useEffect(
-    () => {
+  useEffect(() => {
       if (container.current) {
+        while (container.current.firstChild) {
+          container.current.removeChild(container.current.firstChild);
+        }
+
       container.current.innerHTML = "";
       }
       
