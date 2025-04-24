@@ -228,8 +228,8 @@ const Stockdata = () => {
             </table>
             </div>
 
-            <TradingViewWidget symbol={ticker} />
-            
+            <TradingViewWidget symbol={`NASDAQ:${ticker}`} />
+
           </div>
         ) : (
           <p>Loading stock data...</p>
