@@ -30,9 +30,16 @@ function TradingViewWidget({symbol = "NASDAQ:AAPL", height = "450px"}) {
     }, [symbol]);
 
   return (
-    <div className="tradingview-widget-container" ref={container} style={{ height: `${height}`, width: "100%" }}>
-      <div className="tradingview-widget-container__widget" style={{ height: `${height}`, width: "100%" }}></div>
-    </div>
+    <div 
+      className="tradingview-widget-container" 
+      ref={container} 
+      style={{
+        height: height,
+        width: "100%",
+        borderRadius: "8px",
+        overflow: "hidden",
+       }}
+      />
   );
 }
 
