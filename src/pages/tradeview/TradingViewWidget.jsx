@@ -25,6 +25,7 @@ function TradingViewWidget({symbol = "NASDAQ:AAPL"}) {
           "style": "1",
           "locale": "en",
           "allow_symbol_change": true,
+          "height": "450px"
         });
       container.current.appendChild(script);
     }, [symbol]);
