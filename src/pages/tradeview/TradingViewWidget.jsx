@@ -1,61 +1,36 @@
-// TradingViewWidget.jsx
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, memo } from 'react';
 
-function TradingViewWidget() {
-  const containerRef = useRef();
+function TradingViewWidget({symbol = "NASDAQ:AAPL"}) {
+  const container = useRef();
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js";
-    script.type = "text/javascript";
-    script.async = true;
-    script.innerHTML = JSON.stringify({
-      symbols: [
-        ["Apple", "AAPL|1D"],
-        ["Google", "GOOGL|1D"],
-        ["Microsoft", "MSFT|1D"]
-      ],
-      chartOnly: false,
-      width: "100%",
-      height: "100%",
-      locale: "en",
-      colorTheme: "light",
-      autosize: true,
-      showVolume: false,
-      showMA: false,
-      hideDateRanges: false,
-      hideMarketStatus: false,
-      hideSymbolLogo: false,
-      scalePosition: "right",
-      scaleMode: "Normal",
-      fontFamily: "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
-      fontSize: "10",
-      noTimeScale: false,
-      valuesTracking: "1",
-      changeMode: "price-and-percent",
-      chartType: "area",
-      maLineColor: "#2962FF",
-      maLineWidth: 1,
-      maLength: 9,
-      headerFontSize: "medium",
-      lineWidth: 2,
-      lineType: 0,
-      dateRanges: [
-        "1d|1", "1m|30", "3m|60", "12m|1D", "60m|1W", "all|1M"
-      ]
-    });
-    containerRef.current.appendChild(script);
-  }, []);
+  useEffect(
+    () => {
+      container.current.innerHTML = "";
+
+      const script = document.createElement("script");
+      script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+      script.type = "text/javascript";
+      script.async = true;
+      script.innerHTML = JSON.stringify({
+          "autosize": true,
+          "symbol": symbol,
+          "interval": "D",
+          "timezone": "Etc/UTC",
+          "theme": "light",
+          "style": "1",
+          "locale": "en",
+          "allow_symbol_change": true,
+          "height": "380px",
+          "width": "100%"
+        });
+      container.current.appendChild(script);
+    }, [symbol]);
 
   return (
-    <div
-      className="tradingview-widget-container"
-      ref={containerRef}
-      style={{ height: "500px", width: "100%" }}
-    >
-      <div className="tradingview-widget-container__widget" />
+    <div className="tradingview-widget-container" ref={container} style={{ height: "450px", width: "100%" }}>
+      <div className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "100%" }}></div>
     </div>
   );
 }
 
-export default TradingViewWidget;
+export default memo(TradingViewWidget);
