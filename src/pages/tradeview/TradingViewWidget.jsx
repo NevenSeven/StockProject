@@ -5,13 +5,15 @@ function TradingViewWidget({symbol = "NASDAQ:AAPL"}) {
 
   useEffect(
     () => {
+      if (container.current) {
       container.current.innerHTML = "";
-
+      }
+      
       const script = document.createElement("script");
       script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
       script.type = "text/javascript";
       script.async = true;
-      script.innerHTML = JSON.stringify({
+      script.text = JSON.stringify({
           "autosize": true,
           "symbol": symbol,
           "interval": "D",
