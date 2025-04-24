@@ -156,8 +156,6 @@ const Stockdata = () => {
             <button className="btn btn-outline-success" type="submit">Search</button>
           </form>
 
-          <TradingViewWidget symbol={ticker} />
-          
           {suggestions.length > 0 && (
             <ul className="suggestions-list list-group mt-2" style={{ position: 'absolute', zIndex: 1000, width: '250px' }}>
               {suggestions.map((s, i) => (
@@ -229,6 +227,9 @@ const Stockdata = () => {
               </tbody>
             </table>
             </div>
+
+            <TradingViewWidget symbol={ticker} />
+            
           </div>
         ) : (
           <p>Loading stock data...</p>
