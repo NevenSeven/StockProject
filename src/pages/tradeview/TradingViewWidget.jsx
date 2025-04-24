@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, memo } from 'react';
 
-function TradingViewWidget({symbol = "NASDAQ:AAPL"}) {
+function TradingViewWidget({symbol = "NASDAQ:AAPL", height = "450px"}) {
   const container = useRef(null);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ function TradingViewWidget({symbol = "NASDAQ:AAPL"}) {
     }, [symbol]);
 
   return (
-    <div className="tradingview-widget-container" ref={container} style={{ height: "450px", width: "100%" }}>
+    <div className="tradingview-widget-container" ref={container} style={{ height: `${height}`, width: "100%" }}>
       <div className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "100%" }}></div>
     </div>
   );
