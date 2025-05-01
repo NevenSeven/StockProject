@@ -15,12 +15,32 @@ function ContactPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitted:', formData);
-    alert('Message sent!');
-    setFormData({ name: '', email: '', subject: '', phone: '', message: '' });
+  
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        alert('Message sent!');
+        setFormData({ name: '', email: '', subject: '', phone: '', message: '' });
+      } else {
+        alert(`Error: ${result.error}`);
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert('Failed to send message. Please try again later.');
+    }
   };
+  
 
   return (
     <div className="container my-5">
