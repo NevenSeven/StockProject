@@ -1,7 +1,7 @@
 // Stockdata.js
 import React, { useEffect, useState } from 'react';
 import TradingViewWidget from '../pages/tradeview/TradingViewWidget';
-import SearchBar from '../components/SearchBar';
+import SearchBar from 'SearchBar';
 
 const Stockdata = () => {
   const [ticker, setTicker] = useState("AAPL");
