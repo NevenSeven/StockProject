@@ -71,14 +71,17 @@ const StockSimulator = () => {
   };
 
   const handleBuy = () => {
-    if (!stockPrice || isNaN(amount) || Number(amount) <= 0) return;
-    const shares = Number(amount) / stockPrice;
+    const price = prices[selectedStock];
+    if (!price || isNaN(amount) || Number(amount) <= 0) return;
+  
+    const shares = Number(amount) / price;
     setPortfolio(prev => ({
       ...prev,
       [selectedStock]: (prev[selectedStock] || 0) + shares,
     }));
     setAmount("");
   };
+  
 
   return (
     <div className="container my-4">
@@ -112,12 +115,13 @@ const StockSimulator = () => {
       {/* ✅ Selected Stock Info */}
       <div className="mb-3">
         <strong>Selected:</strong> {selectedStock} <br />
-        {stockPrice !== null ? (
-          <span>Current Price: <strong>${stockPrice.toFixed(2)}</strong></span>
+        {prices[selectedStock] !== undefined ? (
+            <span>Current Price: <strong>${prices[selectedStock].toFixed(2)}</strong></span>
         ) : (
-          <span>Loading price...</span>
+            <span>Loading price...</span>
         )}
-      </div>
+        </div>
+
 
       {/* ✅ Buy Section */}
       <div className="mb-3">
