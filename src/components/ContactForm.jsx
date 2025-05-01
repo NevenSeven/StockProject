@@ -1,29 +1,88 @@
-// ContactForm.jsx
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-const ContactForm = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you'd send data to a backend or third-party service
-    alert("Form submitted!");
+    console.log('Submitted:', formData);
+    alert('Message sent!');
+    // Reset form
+    setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input name="name" onChange={handleChange} placeholder="Name" required className="w-full border p-2" />
-        <input type="email" name="email" onChange={handleChange} placeholder="Email" required className="w-full border p-2" />
-        <input name="subject" onChange={handleChange} placeholder="Subject" required className="w-full border p-2" />
-        <textarea name="message" onChange={handleChange} placeholder="Message" required className="w-full border p-2" />
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Send</button>
+    <div className="container my-5">
+      <h2 className="mb-4">Contact Us</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="row mb-3">
+          <div className="col-md-6">
+            <label htmlFor="name" className="form-label">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              placeholder="Your name"
+            />
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              placeholder="Your email"
+            />
+          </div>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="subject" className="form-label">Subject</label>
+          <input
+            type="text"
+            className="form-control"
+            id="subject"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
+            required
+            placeholder="Subject"
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="message" className="form-label">Message</label>
+          <textarea
+            className="form-control"
+            id="message"
+            name="message"
+            rows="5"
+            value={formData.message}
+            onChange={handleChange}
+            required
+            placeholder="Your message"
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">Send Message</button>
       </form>
     </div>
   );
-};
+}
 
 export default ContactForm;
