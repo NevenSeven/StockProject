@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import './ContactPage.css'; // Optional external styling
 
-function ContactForm() {
+function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
+    phone: '',
     message: ''
   });
 
@@ -17,72 +19,92 @@ function ContactForm() {
     e.preventDefault();
     console.log('Submitted:', formData);
     alert('Message sent!');
-    // Reset form
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setFormData({ name: '', email: '', subject: '', phone: '', message: '' });
   };
 
   return (
     <div className="container my-5">
-      <h2 className="mb-4">Contact Us</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="row mb-3">
-          <div className="col-md-6">
-            <label htmlFor="name" className="form-label">Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              placeholder="Your name"
-            />
-          </div>
-          <div className="col-md-6">
-            <label htmlFor="email" className="form-label">Email</label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              placeholder="Your email"
-            />
-          </div>
+      <h6 className="text-primary fw-bold">Contact Us</h6>
+      <h2 className="fw-bold mb-4">Let's Get in Touch.</h2>
+
+      <div className="row contact-wrapper">
+        {/* Contact Form */}
+        <div className="col-md-8 p-4">
+          <form onSubmit={handleSubmit}>
+            <div className="row g-3">
+              <div className="col-md-6">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  className="form-control"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="col-md-6">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  className="form-control"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="col-md-6">
+                <input
+                  type="text"
+                  name="subject"
+                  placeholder="Subject"
+                  className="form-control"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="col-md-6">
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder="Phone"
+                  className="form-control"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="col-12">
+                <textarea
+                  name="message"
+                  placeholder="Message"
+                  className="form-control"
+                  rows="5"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="col-12">
+                <button type="submit" className="btn btn-custom mt-2">Send Now</button>
+              </div>
+            </div>
+          </form>
         </div>
-        <div className="mb-3">
-          <label htmlFor="subject" className="form-label">Subject</label>
-          <input
-            type="text"
-            className="form-control"
-            id="subject"
-            name="subject"
-            value={formData.subject}
-            onChange={handleChange}
-            required
-            placeholder="Subject"
-          />
+
+        {/* Contact Info */}
+        <div className="col-md-4 contact-info d-flex flex-column justify-content-center">
+          <h4>Contact Info</h4>
+          <p className="mb-1">123 Street, City, State</p>
+          <p className="mb-1">info@StockStalker.com</p>
+          <p className="mb-1">1-234-567-890</p>
+          <p>123-456-7890</p>
         </div>
-        <div className="mb-3">
-          <label htmlFor="message" className="form-label">Message</label>
-          <textarea
-            className="form-control"
-            id="message"
-            name="message"
-            rows="5"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            placeholder="Your message"
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">Send Message</button>
-      </form>
+      </div>
     </div>
   );
 }
 
-export default ContactForm;
+export default ContactPage;
