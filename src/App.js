@@ -7,6 +7,7 @@ import Watchlist from './pages/Watchlist';
 import Simulator from './pages/Simulator';
 import Info from './pages/Info';
 import Other from './pages/Other';
+import Contact from './pages/Contact';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="infostock" element={<Info />} />
           <Route path="otherstocks" element={<Other />} />
           <Route path="simulator" element={<Simulator />} />
+          <Route path="contact" element={<Contact />} />
         </Route>
       </Routes>
     </Router>
