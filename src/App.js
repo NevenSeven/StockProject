@@ -19,7 +19,7 @@ function App() {
           <Route path="infostock" element={<Info />} />
           <Route path="otherstocks" element={<Other />} />
           <Route path="simulator" element={<Simulator />} />
-          <Route path="contact" element={<Contact />} />
+          {/* <Route path="contact" element={<Contact />} /> */}
         </Route>
       </Routes>
     </Router>
