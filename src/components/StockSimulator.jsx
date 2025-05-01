@@ -9,6 +9,7 @@ const StockSimulator = () => {
 
   const [amount, setAmount] = useState("");
   const [portfolio, setPortfolio] = useState({});
+  const [prices, setPrices] = useState({});
 
   // ✅ Fetch ticker list from public/tickers.txt
   useEffect(() => {
@@ -37,13 +38,15 @@ const StockSimulator = () => {
       try {
         const res = await fetch(`https://stockstalker.vercel.app/api/stock?ticker=${selectedStock}`);
         const json = await res.json();
-        setStockPrice(json.close); // assume .close field from API
+        setPrices(prev => ({
+          ...prev,
+          [selectedStock]: json.close,
+        }));
       } catch (err) {
         console.error("Error fetching live price:", err);
-        setStockPrice(null);
       }
     };
-
+  
     if (selectedStock) fetchLiveData();
   }, [selectedStock]);
 
@@ -134,17 +137,20 @@ const StockSimulator = () => {
       <div className="card p-3">
         <h4>Your Portfolio</h4>
         {Object.keys(portfolio).length === 0 ? (
-          <p>You don't own any shares yet.</p>
+            <p>You don't own any shares yet.</p>
         ) : (
-          <ul className="list-group">
+            <ul className="list-group">
             {Object.entries(portfolio).map(([symbol, shares]) => (
-              <li className="list-group-item" key={symbol}>
-                {symbol}: {shares.toFixed(4)} shares = ${stockPrice ? (shares * stockPrice).toFixed(2) : "..."}
-              </li>
+                <li className="list-group-item" key={symbol}>
+                {symbol}: {shares.toFixed(4)} shares = $
+                {prices[symbol]
+                    ? (shares * prices[symbol]).toFixed(2)
+                    : "Fetching..."}
+                </li>
             ))}
-          </ul>
+            </ul>
         )}
-      </div>
+        </div>
     </div>
   );
 };
