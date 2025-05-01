@@ -1,12 +1,12 @@
 import React from 'react';
-import Stockdata from '../components/Stockdata'
+import StockSimulator from '../components/StockSimulator';
 
 const Simulator = () => {
     return (
       <>
         <div className="container">
-          <h1>Simulator</h1>
-          {/* Simulator page content */}
+          <h1 className="my-4">Simulator</h1>
+          <StockSimulator />
         </div>
       </>
     );
