@@ -10,6 +10,7 @@ const StockSimulator = () => {
   const [amount, setAmount] = useState("");
   const [portfolio, setPortfolio] = useState({});
   const [prices, setPrices] = useState({});
+  const [wallet, setWallet] = useState(10000);
 
   // ✅ Fetch ticker list from public/tickers.txt
   useEffect(() => {
@@ -72,15 +73,44 @@ const StockSimulator = () => {
 
   const handleBuy = () => {
     const price = prices[selectedStock];
-    if (!price || isNaN(amount) || Number(amount) <= 0) return;
+    const totalCost = Number(amount);
   
-    const shares = Number(amount) / price;
+    if (!price || isNaN(amount) || totalCost <= 0 || totalCost > wallet) return;
+  
+    const shares = totalCost / price;
+  
     setPortfolio(prev => ({
       ...prev,
       [selectedStock]: (prev[selectedStock] || 0) + shares,
     }));
+  
+    setWallet(prev => prev - totalCost);
     setAmount("");
   };
+
+  const handleSell = () => {
+    const price = prices[selectedStock];
+    const totalSell = Number(amount);
+  
+    if (!price || isNaN(amount) || totalSell <= 0) return;
+  
+    const sharesToSell = totalSell / price;
+    const ownedShares = portfolio[selectedStock] || 0;
+  
+    if (sharesToSell > ownedShares) return; // Cannot sell more than you own
+  
+    setPortfolio(prev => {
+      const newShares = ownedShares - sharesToSell;
+      const updated = { ...prev };
+      if (newShares <= 0) delete updated[selectedStock];
+      else updated[selectedStock] = newShares;
+      return updated;
+    });
+  
+    setWallet(prev => prev + totalSell);
+    setAmount("");
+  };
+  
   
 
   return (
@@ -136,6 +166,13 @@ const StockSimulator = () => {
       <button className="btn btn-primary mb-4" onClick={handleBuy}>
         Buy
       </button>
+      <button className="btn btn-danger mb-4 ms-2" onClick={handleSell}>
+        Sell
+    </button>
+
+      <div className="alert alert-info">
+        <strong>Wallet Balance:</strong> ${wallet.toFixed(2)}
+    </div>
 
       {/* ✅ Portfolio */}
       <div className="card p-3">
