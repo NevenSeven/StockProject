@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import MarketOveriew from '../pages/tradeview/MarketOveriew.jsx';
+import MarketOverview from '../pages/tradeview/MarketOverview.jsx';
 import SearchBar from '../components/SearchBar';
 
 const Watchlist = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [tickersList, setTickersList] = useState([]);
+  const [selectedSymbol, setSelectedSymbol] = useState("NASDAQ:AAPL"); // default
 
   useEffect(() => {
     const fetchTickers = async () => {
@@ -48,15 +49,14 @@ const Watchlist = () => {
 
   const handleSubmit = (e) => {
     if (e) e.preventDefault();
-    if (suggestions.length > 0) {
-      alert(`You selected: ${suggestions[0]}`);
-    } else if (searchTerm) {
-      alert(`You searched for: ${searchTerm}`);
+    if (searchTerm) {
+      setSelectedSymbol(searchTerm);
+      setSuggestions([]);
     }
   };
 
   const handleSelectTicker = (ticker) => {
-    alert(`You selected: ${ticker}`);
+    setSelectedSymbol(ticker);
     setSearchTerm("");
     setSuggestions([]);
   };
@@ -65,7 +65,6 @@ const Watchlist = () => {
     <div className="container">
       <h1>Your Watchlist Here</h1>
 
-      {/* SearchBar */}
       <SearchBar
         searchTerm={searchTerm}
         suggestions={suggestions}
@@ -75,8 +74,7 @@ const Watchlist = () => {
         handleSelectTicker={handleSelectTicker}
       />
 
-      {/* Watchlist page content */}
-      <MarketOveriew />
+      <MarketOverview symbol={selectedSymbol} />
     </div>
   );
 };
