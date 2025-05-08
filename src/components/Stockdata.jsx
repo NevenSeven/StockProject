@@ -39,6 +39,21 @@ const Stockdata = () => {
 
     fetchTickers();
   }, []);
+  
+  const [watchlist, setWatchlist] = useState(() => {
+    const saved = localStorage.getItem('watchlist');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const toggleWatchlist = () => {
+    const updated = watchlist.includes(ticker)
+      ? watchlist.filter(t => t !== ticker)
+      : [...watchlist, ticker];
+  
+    setWatchlist(updated);
+    localStorage.setItem('watchlist', JSON.stringify(updated));
+  };
+  
 
   // ✅ Fetch stock data when ticker changes
   useEffect(() => {
@@ -204,6 +219,11 @@ const Stockdata = () => {
         ) : (
           <p>Loading stock data...</p>
         )}
+
+        <button className="btn btn-warning mb-3" onClick={toggleWatchlist}>
+          {watchlist.includes(ticker) ? '★ Pinned to Watchlist' : '☆ Pin to Watchlist'}
+        </button>
+
 
         <div style={{ height: "450px", width: "100%", marginTop: "20px" }}>
           <TradingViewWidget symbol={`NASDAQ:${ticker}`} />

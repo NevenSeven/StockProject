@@ -1,21 +1,20 @@
 .contact-wrapper {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background: #fff;
-  }
-  
-  .contact-info {
-    background-color: #00bcd4;
-    color: white;
-    padding: 30px;
-  }
-  
-  .btn-custom {
-    background-color: #00bcd4;
-    color: white;
-    border: none;
-  }
-  
-  .btn-custom:hover {
-    background-color: #0097a7;
-  }
-  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+.contact-info {
+  background-color: #00bcd4;
+  color: white;
+  padding: 30px;
+}
+
+.btn-custom {
+  background-color: #00bcd4;
+  color: white;
+  border: none;
+}
+
+.btn-custom:hover {
+  background-color: #0097a7;
+}
