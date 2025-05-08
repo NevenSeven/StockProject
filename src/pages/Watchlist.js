@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import MarketOverview from './tradeview/MarketOverview';
 import SearchBar from '../components/SearchBar';
+import WatchlistCharts from '../components/WatchlistCharts';
+
 
 const Watchlist = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -94,6 +96,7 @@ const Watchlist = () => {
           ))
         )}
       </ul>
+      <WatchlistCharts />
 
       <MarketOverview symbol={selectedSymbol} />
     </div>
