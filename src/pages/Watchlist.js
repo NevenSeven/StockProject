@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MarketOverview from '../pages/tradeview/MarketOverview.jsx';
+import MarketOverview from '../tradeview/MarketOverview.jsx';
 import SearchBar from '../components/SearchBar';
 
 const Watchlist = () => {
