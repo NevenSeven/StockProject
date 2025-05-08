@@ -8,6 +8,16 @@ const Watchlist = () => {
   const [tickersList, setTickersList] = useState([]);
   const [selectedSymbol, setSelectedSymbol] = useState("NASDAQ:AAPL"); // default
 
+
+  const [watchlist, setWatchlist] = useState([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('watchlist');
+    if (saved) {
+      setWatchlist(JSON.parse(saved));
+    }
+  }, []);
+
   useEffect(() => {
     const fetchTickers = async () => {
       try {
@@ -73,6 +83,17 @@ const Watchlist = () => {
         handleSubmit={handleSubmit}
         handleSelectTicker={handleSelectTicker}
       />
+      <ul className="list-group mt-4">
+        {watchlist.length === 0 ? (
+          <li className="list-group-item">No pinned stocks yet.</li>
+        ) : (
+          watchlist.map((ticker, idx) => (
+            <li key={idx} className="list-group-item">
+              {ticker}
+            </li>
+          ))
+        )}
+      </ul>
 
       <MarketOverview symbol={selectedSymbol} />
     </div>
