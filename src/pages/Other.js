@@ -1,4 +1,5 @@
 import React from 'react';
+import CryptoCarousel from '../components/CryptoCarousel';
 
 const Other = () => {
   return (
