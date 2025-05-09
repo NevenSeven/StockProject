@@ -3,7 +3,11 @@ import CryptoCarousel from '../components/CryptoCarousel';
 
 const Crypto = () => {
   return (
+
+    
     <div className="container my-5">
+      <h1 style={{ color: 'red' }}>HELLO TESTING</h1>
+
       <div className="row mb-4">
         <div className="col">
           <div className="card">
