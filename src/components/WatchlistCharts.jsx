@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TradingViewWidget from './pages/tradeview/TradingViewWidget';
+import TradingViewWidget from '../pages/tradeview/TradingViewWidget';
 
 export default function WatchlistCharts() {
   const [watchlist, setWatchlist] = useState([]);
