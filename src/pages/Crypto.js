@@ -1,7 +1,7 @@
 import React from 'react';
 import CryptoCarousel from '../components/CryptoCarousel';
 
-const Other = () => {
+const Crypto = () => {
   return (
     <div className="container my-5">
       <div className="row mb-4">
@@ -104,4 +104,4 @@ const Other = () => {
   );
 };
 
-export default Other;
+export default Crypto;

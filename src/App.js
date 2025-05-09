@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Watchlist from './pages/Watchlist';
 import Simulator from './pages/Simulator';
 import Info from './pages/Info';
-import Other from './pages/Other';
+import Crypto from './pages/Crypto';
 import Contact from './pages/Contact'
 
 
@@ -18,7 +18,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="watchlist" element={<Watchlist />} />
           <Route path="infostock" element={<Info />} />
-          <Route path="otherstocks" element={<Other />} />
+          <Route path="crypto" element={<Crypto />} />
           <Route path="simulator" element={<Simulator />} />
           <Route path="contact" element={<Contact />} />
         </Route>
