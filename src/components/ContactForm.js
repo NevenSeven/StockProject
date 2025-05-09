@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer = () => {
+const Contact = () => {
     return (
         <section className="contact-page-section">
         <div className="container">
