@@ -1,6 +1,7 @@
 // Stockdata.js
 import React, { useEffect, useState } from 'react';
 import TradingViewWidget from '../pages/tradeview/TradingViewWidget';
+import SearchBar from './SearchBar';
 
 const Stockdata = () => {
   const [ticker, setTicker] = useState("AAPL");
@@ -38,6 +39,21 @@ const Stockdata = () => {
 
     fetchTickers();
   }, []);
+  
+  const [watchlist, setWatchlist] = useState(() => {
+    const saved = localStorage.getItem('watchlist');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const toggleWatchlist = () => {
+    const updated = watchlist.includes(ticker)
+      ? watchlist.filter(t => t !== ticker)
+      : [...watchlist, ticker];
+  
+    setWatchlist(updated);
+    localStorage.setItem('watchlist', JSON.stringify(updated));
+  };
+  
 
   // ✅ Fetch stock data when ticker changes
   useEffect(() => {
@@ -142,43 +158,14 @@ const Stockdata = () => {
 
         <h1>Stock Data</h1>
 
+        <SearchBar
+        searchTerm={searchTerm}
+        suggestions={suggestions}
+        handleSearchChange={handleSearchChange}
+        handleKeyDown={handleKeyDown}
+        handleSubmit={handleSubmit}
+        handleSelectTicker={handleSelectTicker}/>
 
-        {/* Search Bar */}
-          <form className="d-flex" role="search" onSubmit={handleSubmit}>
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search ticker"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              onKeyDown={handleKeyDown}
-            />
-            <button className="btn btn-outline-success" type="submit">Search</button>
-          </form>
-
-          {suggestions.length > 0 && (
-            <ul className="suggestions-list list-group mt-2" style={{ position: 'absolute', zIndex: 1000, width: '250px' }}>
-              {suggestions.map((s, i) => (
-                <li
-                  key={i}
-                  className="list-group-item list-group-item-action"
-                  onClick={() => handleSelectTicker(s)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  {s}
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {/* Suggestions Dropdown */}
-          {suggestions.length > 0 && (
-            <ul className="suggestions">
-              {suggestions.map((s) => (
-                <li key={s} onClick={() => handleSelectTicker(s)}>{s}</li>
-              ))}
-            </ul>
-          )}
           {/* Date Picker */}
           <div className="mb-3">
             <label htmlFor="datePicker" className="form-label">Select Date:</label>
@@ -232,6 +219,11 @@ const Stockdata = () => {
         ) : (
           <p>Loading stock data...</p>
         )}
+
+        <button className="btn btn-warning mb-3" onClick={toggleWatchlist}>
+          {watchlist.includes(ticker) ? '★ Pinned to Watchlist' : '☆ Pin to Watchlist'}
+        </button>
+
 
         <div style={{ height: "450px", width: "100%", marginTop: "20px" }}>
           <TradingViewWidget symbol={`NASDAQ:${ticker}`} />

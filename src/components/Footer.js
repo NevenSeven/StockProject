@@ -13,7 +13,7 @@ const Footer = () => {
         </div>
         <ul class="nav col-md-4 justify-content-end">
           <li class="nav-item"><Link className="nav-link px-2 text-muted" to="/">Home</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
+          <li class="nav-item"><Link className="nav-link px-2 text-muted" to="/contact">Contact</Link></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>

@@ -1,13 +1,11 @@
 import React from 'react';
-import Contact from '../components/ContactForm';
-//import TradingViewWidget from './tradeview/TradingViewWidget';
-//moved tradingview widget to stockdata.jsx
+import ContactForm from '../components/ContactForm';
 
 
-const Home = () => {
+const Contact = () => {
   return(
   <>
-    <Contact />
+    <ContactForm />
   </>
   );
 };
