@@ -14,7 +14,7 @@ export default function WatchlistCharts() {
   return (
     <div className="container">
       <h2>Your Watchlist Charts</h2>
-      {watchlist.length === 0 ? (
+      {/* {watchlist.length === 0 ? (
         <p>No stocks pinned to watchlist.</p>
       ) : (
         watchlist.map((ticker, index) => (
@@ -23,7 +23,7 @@ export default function WatchlistCharts() {
             <TradingViewWidget symbol={`NASDAQ:${ticker}`} height="400px" />
           </div>
         ))
-      )}
+      )} */}
     </div>
   );
 }
