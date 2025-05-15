@@ -29,7 +29,8 @@
     "node-fetch": "^3.3.2",
     "nodemailer": "^6.10.1",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.0",
+    "react-router": "^6.30.0",
+    "react-router-dom": "^6.30.0",
     "react-scripts": "^3.0.1",
     "web-vitals": "^4.2.4"
   },
