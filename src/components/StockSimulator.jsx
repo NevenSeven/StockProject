@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 
+const LOCAL_STORAGE_KEYS = {
+  portfolio: "stockSimPortfolio",
+  wallet: "stockSimWallet",
+};
+
 const StockSimulator = () => {
   const [tickersList, setTickersList] = useState([]); // <-- pulled from /tickers.txt
   const [searchTerm, setSearchTerm] = useState("");
@@ -11,6 +16,22 @@ const StockSimulator = () => {
   const [portfolio, setPortfolio] = useState({});
   const [prices, setPrices] = useState({});
   const [wallet, setWallet] = useState(10000);
+
+  useEffect(() => {
+    const savedPortfolio = localStorage.getItem(LOCAL_STORAGE_KEYS.portfolio);
+    const savedWallet = localStorage.getItem(LOCAL_STORAGE_KEYS.wallet);
+
+    if (savedPortfolio) setPortfolio(JSON.parse(savedPortfolio));
+    if (savedWallet) setWallet(parseFloat(savedWallet));
+  }, []);
+
+  useEffect(() => {
+      localStorage.setItem(LOCAL_STORAGE_KEYS.portfolio, JSON.stringify(portfolio));
+    }, [portfolio]);
+
+    useEffect(() => {
+      localStorage.setItem(LOCAL_STORAGE_KEYS.wallet, wallet.toString());
+    }, [wallet]);
 
   // ✅ Fetch ticker list from public/tickers.txt
   useEffect(() => {
@@ -110,6 +131,13 @@ const StockSimulator = () => {
     setWallet(prev => prev + totalSell);
     setAmount("");
   };
+
+  const handleReset = () => {
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.portfolio);
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.wallet);
+    setPortfolio({});
+    setWallet(10000);
+  };
   
   
 
@@ -192,6 +220,10 @@ const StockSimulator = () => {
             </ul>
         )}
         </div>
+          {/* Reset Button */}
+          <button className="btn btn-warning mt-3" onClick={handleReset}>
+            Reset Simulator
+        </button>
     </div>
   );
 };
