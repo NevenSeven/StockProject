@@ -74,6 +74,37 @@ const StockSimulator = () => {
   if (selectedStock) fetchLiveData();
 }, [selectedStock]);
 
+useEffect(() => {
+  const fetchAllPrices = async () => {
+    const symbols = Object.keys(portfolio);
+
+    const updatedPrices = { ...prices };
+
+    await Promise.all(
+      symbols.map(async (symbol) => {
+        if (prices[symbol] != null) return; // skip if already fetched
+
+        try {
+          const res = await fetch(
+            `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90`
+          );
+          const json = await res.json();
+          updatedPrices[symbol] = json.c;
+        } catch (err) {
+          console.error(`Failed to fetch price for ${symbol}:`, err);
+        }
+      })
+    );
+
+    setPrices(updatedPrices);
+  };
+
+  if (Object.keys(portfolio).length > 0) {
+    fetchAllPrices();
+  }
+}, [portfolio]);
+
+
 
   // ✅ Handle search/filter
   const handleSearchChange = (e) => {
