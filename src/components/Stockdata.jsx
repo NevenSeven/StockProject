@@ -109,8 +109,8 @@ const Stockdata = () => {
   const fetchIndices = async () => {
     try {
       const [sp500Res, nasdaqRes] = await Promise.all([
-        fetch("https://finnhub.io/api/v1/quote?symbol=^GSPC&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90"),
-        fetch("https://finnhub.io/api/v1/quote?symbol=^IXIC&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90"),
+        fetch("https://finnhub.io/api/v1/quote?symbol=SPY&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90"),
+        fetch("https://finnhub.io/api/v1/quote?symbol=QQQ&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90"),
       ]);
 
       const sp500 = await sp500Res.json();
