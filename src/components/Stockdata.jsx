@@ -58,13 +58,15 @@ const Stockdata = () => {
   // ✅ Fetch stock data when ticker changes
   useEffect(() => {
   const fetchData = async () => {
-    try {
-      const response = await fetch(
+  try {
+    let result;
+
+    if (!date) {
+      // ✅ Real-time data
+      const res = await fetch(
         `https://finnhub.io/api/v1/quote?symbol=${ticker}&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90`
       );
-      if (!response.ok) throw new Error("Failed to fetch");
-
-      const result = await response.json();
+      result = await res.json();
 
       setData({
         ticker,
@@ -77,13 +79,38 @@ const Stockdata = () => {
         percentageChange: (((result.c - result.pc) / result.pc) * 100).toFixed(2),
       });
 
-      setError(null);
-    } catch (err) {
-      console.error("Fetch error:", err);
-      setError(err.message);
-      setData(null);
+    } else {
+      // 📅 Historical data
+      const from = Math.floor(new Date(date).getTime() / 1000);
+      const to = from + 86400;
+
+      const res = await fetch(
+        `https://finnhub.io/api/v1/stock/candle?symbol=${ticker}&resolution=D&from=${from}&to=${to}&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90`
+      );
+      const json = await res.json();
+
+      if (json.s !== "ok" || !json.o.length) throw new Error("No data available for this date.");
+
+      setData({
+        ticker,
+        date: date,
+        open: json.o[0],
+        close: json.c[0],
+        high: json.h[0],
+        low: json.l[0],
+        volume: json.v[0],
+        percentageChange: (((json.c[0] - json.o[0]) / json.o[0]) * 100).toFixed(2),
+      });
     }
-  };
+
+    setError(null);
+  } catch (err) {
+    console.error("Fetch error:", err);
+    setError(err.message);
+    setData(null);
+  }
+};
+
 
   if (ticker) fetchData();
 }, [ticker, date]);
