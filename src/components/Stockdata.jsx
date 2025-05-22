@@ -59,14 +59,13 @@ const Stockdata = () => {
   useEffect(() => {
   const fetchData = async () => {
   try {
-    let result;
+    let response, result;
 
     if (!date) {
-      // ✅ Real-time data
-      const res = await fetch(
-        `https://finnhub.io/api/v1/quote?symbol=${ticker}&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90`
-      );
-      result = await res.json();
+      // ✅ Use Finnhub for real-time data
+      response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90`);
+      if (!response.ok) throw new Error("Finnhub fetch failed");
+      result = await response.json();
 
       setData({
         ticker,
@@ -75,32 +74,18 @@ const Stockdata = () => {
         close: result.c,
         high: result.h,
         low: result.l,
-        volume: 0,
+        volume: 0, // Not available in Finnhub free tier
         percentageChange: (((result.c - result.pc) / result.pc) * 100).toFixed(2),
       });
 
     } else {
-      // 📅 Historical data
-      const from = Math.floor(new Date(date).getTime() / 1000);
-      const to = from + 86400;
+      // 🕰 Use Tiingo via your backend for historical data
+      const params = new URLSearchParams({ ticker, date });
+      response = await fetch(`https://stockstalker.vercel.app/api/stock?${params.toString()}`);
+      if (!response.ok) throw new Error("Tiingo fetch failed");
+      result = await response.json();
 
-      const res = await fetch(
-        `https://finnhub.io/api/v1/stock/candle?symbol=${ticker}&resolution=D&from=${from}&to=${to}&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90`
-      );
-      const json = await res.json();
-
-      if (json.s !== "ok" || !json.o.length) throw new Error("No data available for this date.");
-
-      setData({
-        ticker,
-        date: date,
-        open: json.o[0],
-        close: json.c[0],
-        high: json.h[0],
-        low: json.l[0],
-        volume: json.v[0],
-        percentageChange: (((json.c[0] - json.o[0]) / json.o[0]) * 100).toFixed(2),
-      });
+      setData(result);
     }
 
     setError(null);
@@ -112,6 +97,7 @@ const Stockdata = () => {
 };
 
 
+useEffect(() => {
   if (ticker) fetchData();
 }, [ticker, date]);
 
