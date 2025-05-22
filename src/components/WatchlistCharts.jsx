@@ -13,7 +13,6 @@ export default function WatchlistCharts() {
 
   return (
     <div className="container">
-      <h2>Your Watchlist Charts</h2>
       {/* {watchlist.length === 0 ? (
         <p>No stocks pinned to watchlist.</p>
       ) : (
