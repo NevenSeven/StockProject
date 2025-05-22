@@ -24,7 +24,7 @@ const Navbar = () => {
               <Link className="nav-link" to="/infostock">Learn About Stocks</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/otherstocks">Other Stocks</Link>
+              <Link className="nav-link" to="/crypto">Crypto</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/simulator">Simulator</Link>
