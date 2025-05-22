@@ -57,32 +57,37 @@ const Stockdata = () => {
 
   // ✅ Fetch stock data when ticker changes
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const params = new URLSearchParams({ ticker });
-        if (date) params.append("date", date);
-  
-        const endpoint = `https://stockstalker.vercel.app/api/stock?${params.toString()}`;
-        const response = await fetch(endpoint);
-  
-        if (!response.ok) {
-          throw new Error(`Error fetching stock data: ${response.status} - ${response.statusText}`);
-        }
-  
-        const result = await response.json();
-        setData(result);
-        setError(null);
-      } catch (err) {
-        console.error("Fetch error:", err);
-        setError(err.message);
-        setData(null);
-      }
-    };
-  
-    if (ticker) {
-      fetchData();
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `https://finnhub.io/api/v1/quote?symbol=${ticker}&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90`
+      );
+      if (!response.ok) throw new Error("Failed to fetch");
+
+      const result = await response.json();
+
+      setData({
+        ticker,
+        date: new Date().toISOString(),
+        open: result.o,
+        close: result.c,
+        high: result.h,
+        low: result.l,
+        volume: 0,
+        percentageChange: (((result.c - result.pc) / result.pc) * 100).toFixed(2),
+      });
+
+      setError(null);
+    } catch (err) {
+      console.error("Fetch error:", err);
+      setError(err.message);
+      setData(null);
     }
-  }, [ticker, date]);
+  };
+
+  if (ticker) fetchData();
+}, [ticker, date]);
+
   
 
   // Fetch index data once

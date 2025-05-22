@@ -56,21 +56,24 @@ const StockSimulator = () => {
 
   // ✅ Fetch live stock data
   useEffect(() => {
-    const fetchLiveData = async () => {
-      try {
-        const res = await fetch(`https://stockstalker.vercel.app/api/stock?ticker=${selectedStock}`);
-        const json = await res.json();
-        setPrices(prev => ({
-          ...prev,
-          [selectedStock]: json.close,
-        }));
-      } catch (err) {
-        console.error("Error fetching live price:", err);
-      }
-    };
-  
-    if (selectedStock) fetchLiveData();
-  }, [selectedStock]);
+  const fetchLiveData = async () => {
+    try {
+      const res = await fetch(
+        `https://finnhub.io/api/v1/quote?symbol=${selectedStock}&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90`
+      );
+      const json = await res.json();
+      setPrices(prev => ({
+        ...prev,
+        [selectedStock]: json.c,
+      }));
+    } catch (err) {
+      console.error("Error fetching live price:", err);
+    }
+  };
+
+  if (selectedStock) fetchLiveData();
+}, [selectedStock]);
+
 
   // ✅ Handle search/filter
   const handleSearchChange = (e) => {
