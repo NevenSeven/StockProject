@@ -75,7 +75,10 @@ const Stockdata = () => {
             high: result.h,
             low: result.l,
             volume: 0,
-            percentageChange: (((result.c - result.pc) / result.pc) * 100).toFixed(2),
+            percentageChange:
+              result.pc && result.c
+                ? (((result.c - result.pc) / result.pc) * 100).toFixed(2)
+                : null,
           });
 
         } else {
@@ -222,9 +225,13 @@ const Stockdata = () => {
                   <td>${data.low}</td>
                   <td>{data.volume}</td>
                   <td>
-                    <span style={{ background: data.percentageChange >= 0 ? "green" : "red", color: "white", padding: "0 5px", borderRadius: "5px" }}>
-                      {data.percentageChange}%
-                    </span>
+                    {data.percentageChange !== null ? (
+                      <span style={{ background: data.percentageChange >= 0 ? "green" : "red", color: "white", padding: "0 5px", borderRadius: "5px" }}>
+                        {data.percentageChange}%
+                      </span>
+                    ) : (
+                      <span style={{ color: "gray" }}>N/A</span>
+                    )}
                   </td>
                 </tr>
               </tbody>
