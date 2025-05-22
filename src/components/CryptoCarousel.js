@@ -5,27 +5,27 @@ const CryptoCarousel = () => {
     {
       name: 'Bitcoin (BTC)',
       description: 'Bitcoin is the first and most well-known cryptocurrency, created in 2009. It introduced the concept of decentralized digital currency.',
-      image: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
+      image: './images/bitcoin-btc-logo.png',
     },
     {
       name: 'Ethereum (ETH)',
       description: 'Ethereum is a decentralized platform that enables smart contracts and decentralized applications (dApps).',
-      image: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+      image: 'images/ethereum-eth-logo.png',
     },
     {
       name: 'Solana (SOL)',
       description: 'Solana is known for its high-speed transactions and low fees, making it a favorite for DeFi and NFTs.',
-      image: 'https://cryptologos.cc/logos/solana-sol-logo.png',
+      image: 'images/solana-sol-logo.png',
     },
     {
       name: 'Binance Coin (BNB)',
       description: 'BNB powers the Binance ecosystem and is used for trading fee discounts and DeFi applications.',
-      image: 'https://cryptologos.cc/logos/binance-coin-bnb-logo.png',
+      image: 'images/binance-coin-bnb-logo.png',
     },
     {
       name: 'Ripple (XRP)',
       description: 'Ripple is a payment protocol that enables fast and inexpensive international transactions.',
-      image: 'https://cryptologos.cc/logos/xrp-xrp-logo.png',
+      image: 'images/xrp-xrp-logo.png',
     },
   ];
 
