@@ -173,13 +173,22 @@ const Stockdata = () => {
             <thead>
               <tr>
                 <th>S&P500</th>
-                <th>{sp500Data ? `$${sp500Data.close}` : "Loading..."}</th>
+                <th>
+                  {sp500Data?.close != null
+                    ? `$${sp500Data.close.toFixed(2)}`
+                    : "Loading..."}
+                </th>
                 <th>NASDAQ</th>
-                <th>{nasdaqData ? `$${nasdaqData.close}` : "Loading..."}</th>
+                <th>
+                  {nasdaqData?.close != null
+                    ? `$${nasdaqData.close.toFixed(2)}`
+                    : "Loading..."}
+                </th>
               </tr>
             </thead>
           </table>
         </div>
+
 
         <h1>Stock Data</h1>
 
