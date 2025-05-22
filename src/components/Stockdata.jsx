@@ -57,49 +57,47 @@ const Stockdata = () => {
 
   // ✅ Fetch stock data when ticker changes
   useEffect(() => {
-  const fetchData = async () => {
-  try {
-    let response, result;
+    const fetchData = async () => {
+      try {
+        let response, result;
 
-    if (!date) {
-      // ✅ Use Finnhub for real-time data
-      response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90`);
-      if (!response.ok) throw new Error("Finnhub fetch failed");
-      result = await response.json();
+        if (!date) {
+          // ✅ Use Finnhub for real-time data
+          response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90`);
+          if (!response.ok) throw new Error("Finnhub fetch failed");
+          result = await response.json();
 
-      setData({
-        ticker,
-        date: new Date().toISOString(),
-        open: result.o,
-        close: result.c,
-        high: result.h,
-        low: result.l,
-        volume: 0, // Not available in Finnhub free tier
-        percentageChange: (((result.c - result.pc) / result.pc) * 100).toFixed(2),
-      });
+          setData({
+            ticker,
+            date: new Date().toISOString(),
+            open: result.o,
+            close: result.c,
+            high: result.h,
+            low: result.l,
+            volume: 0,
+            percentageChange: (((result.c - result.pc) / result.pc) * 100).toFixed(2),
+          });
 
-    } else {
-      // 🕰 Use Tiingo via your backend for historical data
-      const params = new URLSearchParams({ ticker, date });
-      response = await fetch(`https://stockstalker.vercel.app/api/stock?${params.toString()}`);
-      if (!response.ok) throw new Error("Tiingo fetch failed");
-      result = await response.json();
+        } else {
+          // 🕰 Use Tiingo via your backend for historical data
+          const params = new URLSearchParams({ ticker, date });
+          response = await fetch(`https://stockstalker.vercel.app/api/stock?${params.toString()}`);
+          if (!response.ok) throw new Error("Tiingo fetch failed");
+          result = await response.json();
 
-      setData(result);
-    }
+          setData(result);
+        }
 
-    setError(null);
-  } catch (err) {
-    console.error("Fetch error:", err);
-    setError(err.message);
-    setData(null);
-  }
-};
+        setError(null);
+      } catch (err) {
+        console.error("Fetch error:", err);
+        setError(err.message);
+        setData(null);
+      }
+    };
 
-
-useEffect(() => {
-  if (ticker) fetchData();
-}, [ticker, date]);
+    if (ticker) fetchData();
+  }, [ticker, date]);
 
   
 
