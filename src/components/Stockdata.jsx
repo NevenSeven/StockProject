@@ -106,19 +106,25 @@ const Stockdata = () => {
 
   // Fetch index data once
   useEffect(() => {
-    const fetchIndices = async () => {
-      try {
-        const response = await fetch("/api/indices");
-        const result = await response.json();
-        setSP500Data(result.sp500);
-        setNasdaqData(result.nasdaq);
-      } catch (err) {
-        console.error("Index fetch error:", err);
-      }
-    };
-  
-    fetchIndices();
-  }, []);
+  const fetchIndices = async () => {
+    try {
+      const [sp500Res, nasdaqRes] = await Promise.all([
+        fetch("https://finnhub.io/api/v1/quote?symbol=^GSPC&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90"),
+        fetch("https://finnhub.io/api/v1/quote?symbol=^IXIC&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90"),
+      ]);
+
+      const sp500 = await sp500Res.json();
+      const nasdaq = await nasdaqRes.json();
+
+      setSP500Data({ close: sp500.c });
+      setNasdaqData({ close: nasdaq.c });
+    } catch (err) {
+      console.error("Index fetch error:", err);
+    }
+  };
+
+  fetchIndices();
+}, []);
 
   // Handle input
   const handleSearchChange = (e) => {
