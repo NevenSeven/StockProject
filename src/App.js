@@ -9,6 +9,7 @@ import Info from './pages/Info';
 import Crypto from './pages/Crypto';
 import Contact from './pages/Contact';
 import News from './pages/News';
+import About from './pages/About';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="simulator" element={<Simulator />} />
         <Route path="contact" element={<Contact />} />
         <Route path="news" element={<News />} />
+        <Route path="about" element={<About />} />
       </Route>
     </Routes>
   );
