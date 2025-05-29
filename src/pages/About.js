@@ -4,25 +4,25 @@ const founders = [
   {
     name: 'Soham Deshmukh',
     title: 'Lead Front-End Developer',
-    image: '/images/soham.jpg',
+    image: '/imgs/soham.jpg',
     bio: "Not available."
   },
   {
     name: 'Neven Zurcher',
     title: 'Lead Back-End Developer',
-    image: '/images/neven.jpg',
+    image: '/imgs/neven.jpg',
     bio: "I am passionate in Software Development, studying Computer Science at Drexel University's College of Computing & Informatics with a growing interest in AI and Machine Learning. I am eager to contribute to impactful software solutions that blend user-focused design with intelligent automation, helping shape the future of tech-driven innovation."
 },
   {
     name: 'Riley Robbins',
     title: 'Lead Designer',
-    image: '/images/riley.jpg',
+    image: '/imgs/riley.jpg',
     bio: "I'm a Computer Science student at Drexel University. I have a solid foundation in programming and computing, with experience in Java, Python, HTML, CSS, and Adobe Photoshop. My work experience includes being an Instructor for the American Red Cross, where I taught disaster preparedness to children and various customer service roles at McDonald's and Chipotle, where I developed teamwork and problem-solving skills. This experience has created a passion in combining technology and community service to make a positive impact."
   },
   {
     name: 'Mohammed Mustafa',
     title: 'Product Owner',
-    image: '/images/soham.jpg',
+    image: '/imgs/soham.jpg',
     bio: "Not available."
   }
 ];
