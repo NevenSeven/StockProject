@@ -75,28 +75,6 @@ const StockSimulator = () => {
 }, [selectedStock]);
 
 useEffect(() => {
-  const interval = setInterval(async () => {
-    try {
-      if (!selectedStock) return;
-
-      const res = await fetch(
-        `https://finnhub.io/api/v1/quote?symbol=${selectedStock}&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90`
-      );
-      const json = await res.json();
-
-      setPrices(prev => ({
-        ...prev,
-        [selectedStock]: json.c,
-      }));
-    } catch (err) {
-      console.error("Live update error:", err);
-    }
-  }, 5000); // update every 5 seconds
-
-  return () => clearInterval(interval); // cleanup
-}, [selectedStock]);
-
-useEffect(() => {
   const fetchAllPrices = async () => {
     const symbols = Object.keys(portfolio);
 
@@ -125,34 +103,6 @@ useEffect(() => {
     fetchAllPrices();
   }
 }, [portfolio]);
-
-useEffect(() => {
-  const interval = setInterval(async () => {
-    const symbols = Object.keys(portfolio);
-    if (symbols.length === 0) return;
-
-    const updatedPrices = { ...prices };
-
-    await Promise.all(
-      symbols.map(async (symbol) => {
-        try {
-          const res = await fetch(
-            `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=d0nnks9r01qn5ghksi8gd0nnks9r01qn5ghksi90`
-          );
-          const json = await res.json();
-          updatedPrices[symbol] = json.c;
-        } catch (err) {
-          console.error(`Live update error for ${symbol}:`, err);
-        }
-      })
-    );
-
-    setPrices(updatedPrices);
-  }, 5000); // update every 5 seconds
-
-  return () => clearInterval(interval);
-}, [portfolio]);
-
 
 
 
