@@ -75,8 +75,7 @@ const Watchlist = () => {
 
   return (
     <div className="container">
-      <h1>Your Watchlist Here</h1>
-
+      
       <SearchBar
         searchTerm={searchTerm}
         suggestions={suggestions}
